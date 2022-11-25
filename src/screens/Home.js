@@ -9,6 +9,9 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 
+import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+
 import logo from "../../assets/images/logo.png";
 import garotaLendo from "../../assets/images/garota-lendo.png";
 
@@ -27,23 +30,32 @@ const Home = () => {
       <View style={estilos.imagemHome}>
         <Image style={estilos.garotaLendo} source={garotaLendo} />
       </View>
-      <View style={estilos.texto}>
-        <Text>Encontre um livro ou ajude alguém a encontrar o seu</Text>
+      <View style={estilos.viewTexto}>
+        <Text style={estilos.texto}>
+          Encontre um livro ou ajude alguém a encontrar o seu
+        </Text>
       </View>
       <View style={estilos.viewBotoes}>
         <Pressable style={estilos.botoes}>
-          <Text>Anunciar Livro</Text>
+          <Text style={estilos.textoBotao}>
+            <MaterialIcons name="menu-book" size={16} color="white" />
+            Anunciar Livro
+          </Text>
         </Pressable>
         <Pressable style={estilos.botoes}>
-          <Text>Buscar Livro</Text>
+          <Text style={estilos.textoBotao}>
+            {" "}
+            <FontAwesome name="search" size={16} color="white" />
+            Buscar Livro
+          </Text>
         </Pressable>
       </View>
       <View style={estilos.rodape}>
-        <Pressable style={estilos.botoesRodape}>
-          <Text>Privacidade</Text>
+        <Pressable style={estilos.botoes}>
+          <Text style={estilos.textoBotao}>Privacidade</Text>
         </Pressable>
-        <Pressable style={estilos.botoesRodape}>
-          <Text>Sobre</Text>
+        <Pressable style={estilos.botoes}>
+          <Text style={estilos.textoBotao}>Sobre</Text>
         </Pressable>
       </View>
     </SafeAreaView>
@@ -60,33 +72,52 @@ const estilos = StyleSheet.create({
     justifyContent: "center",
   },
   barraLogo: {
+    paddingTop: 25,
     backgroundColor: "#EEBF33",
     width: "100%",
-    height: 80,
+    height: 90,
     justifyContent: "center",
     alignItems: "center",
   },
   logo: {
+    resizeMode: "contain",
     width: 60,
     height: 60,
   },
-  imagemHome: {},
   garotaLendo: {
-    width: 128,
-    height: 128,
+    width: 350,
+    height: 350,
   },
-  texto: {},
+  viewTexto: {
+    margin: 10,
+  },
+  texto: {
+    fontSize: 18,
+    fontFamily: "roboto",
+    textAlign: "center",
+  },
   viewBotoes: {
     flex: 2,
+    marginTop: 30,
     flexDirection: "row",
     justifyContent: "space-evenly",
+    alignItems: "flex-start",
+    width: "80%",
   },
-  botoes: {},
+  botoes: {
+    backgroundColor: "#402914",
+    padding: 16,
+    borderRadius: 3,
+  },
+  textoBotao: {
+    color: "white",
+    fontFamily: "roboto",
+  },
   rodape: {
-    flex: 0.5,
     flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 16,
     backgroundColor: "#EEBF33",
     width: "100%",
   },
-  botoesRodape: {},
 });
