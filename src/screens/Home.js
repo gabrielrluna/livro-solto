@@ -38,15 +38,13 @@ const Home = () => {
       <View style={estilos.viewBotoes}>
         <Pressable style={estilos.botoes}>
           <Text style={estilos.textoBotao}>
-            <MaterialIcons name="menu-book" size={16} color="white" />
-            Anunciar Livro
+            <MaterialIcons name="menu-book" size={16} color="white" /> Anunciar
+            Livro
           </Text>
         </Pressable>
         <Pressable style={estilos.botoes}>
           <Text style={estilos.textoBotao}>
-            {" "}
-            <FontAwesome name="search" size={16} color="white" />
-            Buscar Livro
+            <FontAwesome name="search" size={16} color="white" /> Buscar Livro
           </Text>
         </Pressable>
       </View>
@@ -85,8 +83,9 @@ const estilos = StyleSheet.create({
     height: 60,
   },
   garotaLendo: {
-    width: 350,
-    height: 350,
+    resizeMode: "contain",
+    width: 200,
+    height: 200,
   },
   viewTexto: {
     margin: 10,
