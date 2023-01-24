@@ -15,7 +15,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import logo from "../../assets/images/logo.png";
 import garotaLendo from "../../assets/images/garota-lendo.png";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [fonteCarregada] = useFonts({
     roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
   });
@@ -36,23 +36,43 @@ const Home = () => {
         </Text>
       </View>
       <View style={estilos.viewBotoes}>
-        <Pressable style={estilos.botoes}>
+        <Pressable
+          style={estilos.botoes}
+          onPress={() => {
+            navigation.navigate("AnunciarLivro");
+          }}
+        >
           <Text style={estilos.textoBotao}>
             <MaterialIcons name="menu-book" size={16} color="white" /> Anunciar
             Livro
           </Text>
         </Pressable>
-        <Pressable style={estilos.botoes}>
+        <Pressable
+          style={estilos.botoes}
+          onPress={() => {
+            navigation.navigate("Busca");
+          }}
+        >
           <Text style={estilos.textoBotao}>
             <FontAwesome name="search" size={16} color="white" /> Buscar Livro
           </Text>
         </Pressable>
       </View>
       <View style={estilos.rodape}>
-        <Pressable style={estilos.botoes}>
+        <Pressable
+          style={estilos.botoes}
+          onPress={() => {
+            navigation.navigate("Privacidade");
+          }}
+        >
           <Text style={estilos.textoBotao}>Privacidade</Text>
         </Pressable>
-        <Pressable style={estilos.botoes}>
+        <Pressable
+          style={estilos.botoes}
+          onPress={() => {
+            navigation.navigate("Sobre");
+          }}
+        >
           <Text style={estilos.textoBotao}>Sobre</Text>
         </Pressable>
       </View>
