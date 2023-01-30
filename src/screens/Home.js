@@ -70,6 +70,16 @@ const Home = ({ navigation }) => {
         <Pressable
           style={estilos.botoes}
           onPress={() => {
+            navigation.navigate("HomeTeste");
+          }}
+        >
+          <Text style={estilos.textoBotao}>
+            <FontAwesome name="search" size={16} color="white" /> Home Teste
+          </Text>
+        </Pressable>
+        <Pressable
+          style={estilos.botoes}
+          onPress={() => {
             navigation.navigate("Sobre");
           }}
         >
