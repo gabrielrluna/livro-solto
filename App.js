@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 
 import AnunciarLivro from "./src/screens/AnunciarLivro";
 import Busca from "./src/screens/Busca";
@@ -26,14 +27,30 @@ export default function App() {
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
-              if (route.name === "Home") {
-                iconName = focused
-                  ? "ios-information-circle"
-                  : "ios-information-circle-outline";
-              } else if (route.name === "Settings") {
-                iconName = focused ? "ios-list" : "ios-list-outline";
-              }
+              switch (route.name) {
+                case "Home":
+                  iconName = focused ? "home" : "home-outline";
+                  break;
 
+                case "AnunciarLivro":
+                  iconName = focused ? "add-circle" : "add-circle-outline";
+                  break;
+
+                case "Busca":
+                  iconName = focused ? "search" : "search-outline";
+                  break;
+
+                case "Favoritos":
+                  iconName = focused ? "star" : "star-outline";
+                  break;
+                case "Perfil":
+                  iconName = focused ? "person-sharp" : "person-outline";
+                  break;
+
+                default:
+                  iconName = focused ? "home" : "home-outline";
+                  break;
+              }
               // You can return any component that you like here!
               return <Ionicons name={iconName} size={size} color={color} />;
             },
@@ -48,15 +65,15 @@ export default function App() {
           <Tab.Screen component={Home} name="Home" />
           <Tab.Screen component={AnunciarLivro} name="AnunciarLivro" />
           <Tab.Screen component={Busca} name="Busca" />
-          <Tab.Screen component={Chat} name="Chat" />
-          <Tab.Screen component={DetalhesLivro} name="DetalhesLivro" />
+          {/* <Tab.Screen component={Chat} name="Chat" /> */}
+          {/* <Tab.Screen component={DetalhesLivro} name="DetalhesLivro" /> */}
           <Tab.Screen component={Favoritos} name="Favoritos" />
 
-          <Tab.Screen component={ListaLivros} name="ListaLivros" />
+          {/* <Tab.Screen component={ListaLivros} name="ListaLivros" /> */}
           <Tab.Screen component={Perfil} name="Perfil" />
-          <Tab.Screen component={Privacidade} name="Privacidade" />
-          <Tab.Screen component={HomeTeste} name="HomeTeste" />
-          <Tab.Screen component={Sobre} name="Sobre" />
+          {/* <Tab.Screen component={Privacidade} name="Privacidade" /> */}
+          {/* <Tab.Screen component={HomeTeste} name="HomeTeste" /> */}
+          {/* <Tab.Screen component={Sobre} name="Sobre" /> */}
         </Tab.Navigator>
       </NavigationContainer>
     </>
