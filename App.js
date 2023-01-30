@@ -20,7 +20,13 @@ export default function App() {
     <>
       <StatusBar />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#EEBF33",
+            },
+          }}
+        >
           <Stack.Screen component={Home} name="Home" />
           <Stack.Screen component={AnunciarLivro} name="AnunciarLivro" />
           <Stack.Screen component={Busca} name="Busca" />
@@ -38,4 +44,4 @@ export default function App() {
   );
 }
 
-const estilos = StyleSheet.create({});
+const styles = StyleSheet.create({});
