@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -52,40 +52,50 @@ export default function App() {
                   iconName = focused ? "home" : "home-outline";
                   break;
               }
-              // You can return any component that you like here!
               return <Ionicons name={iconName} size={size} color={color} />;
             },
             tabBarActiveTintColor: "#402914",
             tabBarInactiveTintColor: "#402914",
             tabBarStyle: {
+              position: "absolute",
               backgroundColor: "#EEBF33",
+              height: 60,
+              paddingBottom: 10,
+              paddingTop: 10,
             },
           })}
-
-          // headerStyle: {
-          //   backgroundColor: "#EEBF33",
-          // },
         >
-          <Tab.Screen component={Home} name="Home" />
-          <Tab.Screen component={AnunciarLivro} name="Anunciar Livro" />
-          <Tab.Screen component={Busca} name="Busca" />
-          {/* <Tab.Screen component={Chat} name="Chat" /> */}
-          {/* <Tab.Screen component={DetalhesLivro} name="DetalhesLivro" /> */}
-          <Tab.Screen component={Favoritos} name="Favoritos" />
+          <Tab.Screen
+            component={Home}
+            name="Home"
+            options={{ headerShown: false }}
+          />
+          <Tab.Screen
+            component={AnunciarLivro}
+            name="Anunciar Livro"
+            options={{ headerShown: false }}
+          />
+          <Tab.Screen
+            component={Busca}
+            name="Busca"
+            options={{ headerShown: false }}
+          />
 
-          {/* <Tab.Screen component={ListaLivros} name="ListaLivros" /> */}
-          <Tab.Screen component={Perfil} name="Perfil" />
-          {/* <Tab.Screen component={Privacidade} name="Privacidade" /> */}
-          {/* <Tab.Screen component={HomeTeste} name="HomeTeste" /> */}
-          {/* <Tab.Screen component={Sobre} name="Sobre" /> */}
+          <Tab.Screen
+            component={Favoritos}
+            name="Favoritos"
+            options={{ headerShown: false }}
+          />
+
+          <Tab.Screen
+            component={Perfil}
+            name="Perfil"
+            options={{ headerShown: false }}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     </>
   );
 }
 
-const estilos = StyleSheet.create({
-  // menu: {
-  //   backgroundColor: "#402914",
-  // },
-});
+const estilos = StyleSheet.create({});
