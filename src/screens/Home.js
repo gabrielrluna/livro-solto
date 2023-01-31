@@ -25,58 +25,6 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={estilos.container}>
       <View style={estilos.barraLogo}>
-        <Image style={estilos.logo} source={logo} />
-      </View>
-      <View style={estilos.imagemHome}>
-        <Image style={estilos.garotaLendo} source={garotaLendo} />
-      </View>
-      <View style={estilos.viewTexto}>
-        <Text style={estilos.texto}>
-          Encontre um livro ou ajude alguém a encontrar o seu
-        </Text>
-      </View>
-      <View style={estilos.viewBotoes}>
-        <Pressable
-          style={estilos.botoes}
-          onPress={() => {
-            navigation.navigate("AnunciarLivro");
-          }}
-        >
-          <Text style={estilos.textoBotao}>
-            <MaterialIcons name="menu-book" size={16} color="white" /> Anunciar
-            Livro
-          </Text>
-        </Pressable>
-        <Pressable
-          style={estilos.botoes}
-          onPress={() => {
-            navigation.navigate("Busca");
-          }}
-        >
-          <Text style={estilos.textoBotao}>
-            <FontAwesome name="search" size={16} color="white" /> Buscar Livro
-          </Text>
-        </Pressable>
-      </View>
-      <View style={estilos.rodape}>
-        <Pressable
-          style={estilos.botoes}
-          onPress={() => {
-            navigation.navigate("Privacidade");
-          }}
-        >
-          <Text style={estilos.textoBotao}>Privacidade</Text>
-        </Pressable>
-        <Pressable
-          style={estilos.botoes}
-          onPress={() => {
-            navigation.navigate("HomeTeste");
-          }}
-        >
-          <Text style={estilos.textoBotao}>
-            <FontAwesome name="search" size={16} color="white" /> Home Teste
-          </Text>
-        </Pressable>
         <Pressable
           style={estilos.botoes}
           onPress={() => {
@@ -85,6 +33,26 @@ const Home = ({ navigation }) => {
         >
           <Text style={estilos.textoBotao}>Sobre</Text>
         </Pressable>
+
+        <Image style={estilos.logo} source={logo} />
+
+        <Pressable
+          style={estilos.botoes}
+          onPress={() => {
+            navigation.navigate("Privacidade");
+          }}
+        >
+          <Text style={estilos.textoBotao}>Privacidade</Text>
+        </Pressable>
+      </View>
+
+      <View style={estilos.imagemHome}>
+        <Image style={estilos.garotaLendo} source={garotaLendo} />
+      </View>
+      <View style={estilos.viewTexto}>
+        <Text style={estilos.texto}>
+          Encontre um livro ou ajude alguém a encontrar o seu
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -97,15 +65,15 @@ const estilos = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "center",
   },
   barraLogo: {
-    paddingTop: 25,
+    padding: 8,
     backgroundColor: "#EEBF33",
     width: "100%",
-    height: 90,
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
+    alignContent: "center",
   },
   logo: {
     resizeMode: "contain",
@@ -125,28 +93,17 @@ const estilos = StyleSheet.create({
     fontFamily: "roboto",
     textAlign: "center",
   },
-  viewBotoes: {
-    flex: 2,
-    marginTop: 30,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "flex-start",
-    width: "80%",
-  },
+
   botoes: {
     backgroundColor: "#402914",
     padding: 16,
     borderRadius: 3,
+    width: "30%",
+    justifyContent: "center",
   },
   textoBotao: {
     color: "white",
     fontFamily: "roboto",
-  },
-  rodape: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 16,
-    backgroundColor: "#EEBF33",
-    width: "100%",
+    textAlign: "center",
   },
 });
