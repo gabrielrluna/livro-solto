@@ -27,12 +27,13 @@ export default function App() {
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
+
               switch (route.name) {
                 case "Home":
                   iconName = focused ? "home" : "home-outline";
                   break;
 
-                case "AnunciarLivro":
+                case "Anunciar Livro":
                   iconName = focused ? "add-circle" : "add-circle-outline";
                   break;
 
@@ -54,8 +55,11 @@ export default function App() {
               // You can return any component that you like here!
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            tabBarActiveTintColor: "tomato",
-            tabBarInactiveTintColor: "gray",
+            tabBarActiveTintColor: "#402914",
+            tabBarInactiveTintColor: "#402914",
+            tabBarStyle: {
+              backgroundColor: "#EEBF33",
+            },
           })}
 
           // headerStyle: {
@@ -63,7 +67,7 @@ export default function App() {
           // },
         >
           <Tab.Screen component={Home} name="Home" />
-          <Tab.Screen component={AnunciarLivro} name="AnunciarLivro" />
+          <Tab.Screen component={AnunciarLivro} name="Anunciar Livro" />
           <Tab.Screen component={Busca} name="Busca" />
           {/* <Tab.Screen component={Chat} name="Chat" /> */}
           {/* <Tab.Screen component={DetalhesLivro} name="DetalhesLivro" /> */}
@@ -80,4 +84,8 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({});
+const estilos = StyleSheet.create({
+  // menu: {
+  //   backgroundColor: "#402914",
+  // },
+});
