@@ -24,6 +24,7 @@ const Busca = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View></View>
+
       <View style={styles.inputView}>
         <TextInput style={styles.input} placeholder="Digite o livro" />
         <Pressable style={styles.inputBotao}>
@@ -33,6 +34,7 @@ const Busca = () => {
           </Text>
         </Pressable>
       </View>
+
       <View style={styles.livroCard}>
         <View style={styles.livroBackground}>
           <Image source={fundoAlternativo} style={styles.fundoAlternativo} />

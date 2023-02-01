@@ -46,26 +46,32 @@ const AnunciarLivro = () => {
           numberOfLines={4}
           maxLength={140}
         />
+
         <View style={styles.selectView}>
-          <DropDownPicker
-            open={open}
-            value={value}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValue}
-            setItems={setItems}
-            translation={{
-              PLACEHOLDER: "Selecione",
-            }}
-            style={styles.drop}
-          />
-          <Pressable style={styles.buscarBotao}>
-            <Text style={styles.texto}>
-              <AntDesign name="search1" size={20} color="white" />
-              Buscar Capa
-            </Text>
-          </Pressable>
+          <View style={{ width: "49%", marginRight: "1%" }}>
+            <DropDownPicker
+              open={open}
+              value={value}
+              items={items}
+              setOpen={setOpen}
+              setValue={setValue}
+              setItems={setItems}
+              translation={{
+                PLACEHOLDER: "Selecione",
+              }}
+              // style={{ width: "50%" }}
+            />
+          </View>
+          <View style={{ width: "49%" }}>
+            <Pressable style={styles.buscarBotao}>
+              <Text style={styles.texto}>
+                <AntDesign name="search1" size={20} color="white" />
+                Buscar Capa
+              </Text>
+            </Pressable>
+          </View>
         </View>
+
         <Pressable style={styles.enviarBotao}>
           <Text style={styles.texto}>Enviar</Text>
         </Pressable>
@@ -82,6 +88,7 @@ const styles = StyleSheet.create({
     padding: 8,
     alignItems: "center",
     alignContent: "center",
+    width: 400,
   },
   imageView: {
     alignItems: "center",
@@ -97,36 +104,50 @@ const styles = StyleSheet.create({
     width: 150,
   },
   formView: {
-    height: "70%",
+    height: "50%",
     width: "90%",
+    flexDirection: "column",
+    justifyContent: "space-around",
   },
   inputUm: {
     height: 40,
-    margin: 10,
     borderWidth: 1,
     padding: 10,
     backgroundColor: "white",
+    borderRadius: 3,
   },
   inputDois: {
-    margin: 10,
     borderWidth: 1,
     padding: 10,
     backgroundColor: "white",
+    borderRadius: 3,
   },
   selectView: {
-    padding: 10,
     flexDirection: "row",
   },
   drop: {
+    borderRadius: 3,
     width: "45%",
   },
   buscarBotao: {
-    width: "45%",
     backgroundColor: "grey",
-    alignContent: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
+    height: 50,
+    // marginVertical: 4,
+  },
+  texto: {
+    color: "white",
+    padding: 4,
+    justifyContent: "center",
   },
   enviarBotao: {
-    backgroundColor: "#F7F5ED",
-    width: "90%",
+    // margin: 10,
+    padding: 10,
+    borderRadius: 3,
+    backgroundColor: "#177567",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
