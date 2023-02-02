@@ -54,6 +54,15 @@ const Home = ({ navigation }) => {
           Encontre um livro ou ajude alguém a encontrar o seu
         </Text>
       </View>
+      <View>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("DetalhesLivro");
+          }}
+        >
+          <Text>DetalhesLivro</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 };

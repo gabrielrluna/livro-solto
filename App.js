@@ -8,7 +8,6 @@ import { Ionicons } from "@expo/vector-icons";
 import AnunciarLivro from "./src/screens/AnunciarLivro";
 import Busca from "./src/screens/Busca";
 import Chat from "./src/screens/Chat";
-import DetalhesLivro from "./src/screens/DetalhesLivro";
 import Favoritos from "./src/screens/Favoritos";
 import Home from "./src/screens/Home";
 import ListaLivros from "./src/screens/ListaLivros";
@@ -17,8 +16,10 @@ import Privacidade from "./src/screens/Privacidade";
 import Sobre from "./src/screens/Sobre";
 import HomeTeste from "./src/screens/HomeTeste";
 
-export default function App() {
+export function App() {
   const Tab = createBottomTabNavigator();
+  // const Stack = createNativeStackNavigator();
+
   return (
     <>
       <StatusBar />
@@ -93,6 +94,26 @@ export default function App() {
             options={{ headerShown: false }}
           />
         </Tab.Navigator>
+      </NavigationContainer>
+    </>
+  );
+}
+
+export function StackNav() {
+  const Stack = createNativeStackNavigator();
+
+  return (
+    <>
+      <StatusBar />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen component={Home} name="Home" />
+          <Stack.Screen
+            component={DetalhesLivro}
+            name="DetalhesLivro"
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
     </>
   );
