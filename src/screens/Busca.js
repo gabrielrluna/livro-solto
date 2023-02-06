@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
   },
   livroCard: {
     backgroundColor: "#D9D9D9",
-    height: "80%",
-    width: "70%",
+    height: "60%",
+    width: "60%",
   },
   livroBackground: {
     height: "80%",
