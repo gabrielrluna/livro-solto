@@ -107,16 +107,4 @@ const App = () => {
 
 export default App;
 
-export function TabNav() {
-  <NavigationContainer>
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen component={Home} name="Home" />
-      <Stack.Screen
-        component={DetalhesLivro}
-        name="DetalhesLivro"
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
-  </NavigationContainer>;
-}
 const styles = StyleSheet.create({});
