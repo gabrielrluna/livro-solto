@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     alignItems: "center",
+    alignContent: "center",
   },
   barraLogo: {
     padding: 8,
@@ -129,8 +130,9 @@ const styles = StyleSheet.create({
   },
   livroCard: {
     backgroundColor: "#D9D9D9",
-    height: "75%",
-    width: "70%",
+    height: "60%",
+    width: "60%",
+    marginVertical: 8,
   },
   livroBackground: {
     height: "80%",
