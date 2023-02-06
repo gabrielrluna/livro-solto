@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import AnunciarLivro from "./src/screens/AnunciarLivro";
 import Busca from "./src/screens/Busca";
@@ -14,9 +15,11 @@ import Privacidade from "./src/screens/Privacidade";
 import Sobre from "./src/screens/Sobre";
 import HomeTeste from "./src/screens/HomeTeste";
 import { Ionicons } from "@expo/vector-icons";
+import { func } from "prop-types";
 
 const App = () => {
   const Tab = createBottomTabNavigator();
+  const Stack = createStackNavigator();
 
   return (
     <>
@@ -91,6 +94,11 @@ const App = () => {
             name="Perfil"
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            component={DetalhesLivro}
+            name="DetalhesLivro"
+            options={{ headerShown: false }}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     </>
@@ -99,4 +107,16 @@ const App = () => {
 
 export default App;
 
+export function TabNav() {
+  <NavigationContainer>
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen component={Home} name="Home" />
+      <Stack.Screen
+        component={DetalhesLivro}
+        name="DetalhesLivro"
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  </NavigationContainer>;
+}
 const styles = StyleSheet.create({});
