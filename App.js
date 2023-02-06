@@ -8,6 +8,7 @@ import Chat from "./src/screens/Chat";
 import Favoritos from "./src/screens/Favoritos";
 import Home from "./src/screens/Home";
 import ListaLivros from "./src/screens/ListaLivros";
+import DetalhesLivro from "./src/screens/DetalhesLivro";
 import Perfil from "./src/screens/Perfil";
 import Privacidade from "./src/screens/Privacidade";
 import Sobre from "./src/screens/Sobre";
