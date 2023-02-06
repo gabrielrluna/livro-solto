@@ -1,6 +1,8 @@
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 
 import AnunciarLivro from "./src/screens/AnunciarLivro";
 import Busca from "./src/screens/Busca";
@@ -12,10 +14,10 @@ import Perfil from "./src/screens/Perfil";
 import Privacidade from "./src/screens/Privacidade";
 import Sobre from "./src/screens/Sobre";
 import HomeTeste from "./src/screens/HomeTeste";
-import { Ionicons } from "@expo/vector-icons";
 
-const App = () => {
+export function App() {
   const Tab = createBottomTabNavigator();
+  // const Stack = createNativeStackNavigator();
 
   return (
     <>
@@ -94,8 +96,6 @@ const App = () => {
       </NavigationContainer>
     </>
   );
-};
+}
 
-export default App;
-
-const styles = StyleSheet.create({});
+const estilos = StyleSheet.create({});
