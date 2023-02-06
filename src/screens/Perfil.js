@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import fotoAlternativa from "../../assets/images/fotoAlternativa.png";
 import { AntDesign } from "@expo/vector-icons";
+import garotaLendo from "../../assets/images/garota-lendo.png";
 
 const Perfil = () => {
   return (
@@ -21,6 +22,10 @@ const Perfil = () => {
           <Text style={styles.texto}>198 Anos</Text>
           <Text style={styles.texto}>Senac Favela</Text>
         </View>
+      </View>
+
+      <View style={styles.imagemHome}>
+        <Image style={styles.garotaLendo} source={garotaLendo} />
       </View>
 
       <View style={styles.chatView}>
@@ -74,6 +79,11 @@ const styles = StyleSheet.create({
   texto: {
     fontFamily: "roboto",
     fontSize: 18,
+  },
+  garotaLendo: {
+    resizeMode: "contain",
+    width: 200,
+    height: 150,
   },
   chatView: {
     width: "100%",

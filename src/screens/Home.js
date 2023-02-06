@@ -8,12 +8,12 @@ import {
   View,
 } from "react-native";
 import { useFonts } from "expo-font";
-
+import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
 import logo from "../../assets/images/logo.png";
-import garotaLendo from "../../assets/images/garota-lendo.png";
+import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
 
 const Home = ({ navigation }) => {
   const [fonteCarregada] = useFonts({
@@ -23,44 +23,60 @@ const Home = ({ navigation }) => {
   if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
 
   return (
-    <SafeAreaView style={estilos.container}>
-      <View style={estilos.barraLogo}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.barraLogo}>
         <Pressable
-          style={estilos.botoes}
+          style={styles.botoes}
           onPress={() => {
             navigation.navigate("Sobre");
           }}
         >
-          <Text style={estilos.textoBotao}>Sobre</Text>
+          <Text style={styles.textoBotao}>Sobre</Text>
         </Pressable>
 
-        <Image style={estilos.logo} source={logo} />
+        <Image style={styles.logo} source={logo} />
 
         <Pressable
-          style={estilos.botoes}
+          style={styles.botoes}
           onPress={() => {
             navigation.navigate("Privacidade");
           }}
         >
-          <Text style={estilos.textoBotao}>Privacidade</Text>
+          <Text style={styles.textoBotao}>Privacidade</Text>
         </Pressable>
       </View>
 
-      <View style={estilos.imagemHome}>
-        <Image style={estilos.garotaLendo} source={garotaLendo} />
-      </View>
-      <View style={estilos.viewTexto}>
-        <Text style={estilos.texto}>
-          Encontre um livro ou ajude alguém a encontrar o seu
-        </Text>
-      </View>
-      <View>
-        <Pressable
-          onPress={() => {
-            navigation.navigate("DetalhesLivro");
-          }}
-        >
-          <Text>DetalhesLivro</Text>
+      <View style={styles.livroCard}>
+        <View style={styles.livroBackground}>
+          <Image source={fundoAlternativo} style={styles.fundoAlternativo} />
+        </View>
+        <View style={styles.titulo}>
+          <Text style={styles.textoTitulo}>TITULO CAPITALIZE</Text>
+        </View>
+        <View style={styles.yellowButtonsView}>
+          <Pressable
+            style={styles.yellowButtons}
+            onPress={() => {
+              navigation.navigate("DetalhesLivro");
+            }}
+          >
+            <Text style={styles.brownText}>
+              <AntDesign name="infocirlceo" size={16} color="#5A3F26" />
+              {""} Detalhes
+            </Text>
+          </Pressable>
+          <Pressable style={styles.yellowButtons}>
+            <Text style={styles.brownText}>
+              <AntDesign name="hearto" size={16} color="#5A3F26" />
+              {""} Favoritar
+            </Text>
+          </Pressable>
+        </View>
+        <Pressable style={styles.escolherBotao}>
+          <Text style={styles.texto}>
+            <AntDesign name="pluscircle" size={18} color="white" />
+            {""} Escolher
+          </Text>
         </Pressable>
       </View>
     </SafeAreaView>
@@ -69,7 +85,7 @@ const Home = ({ navigation }) => {
 
 export default Home;
 
-const estilos = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
@@ -89,11 +105,7 @@ const estilos = StyleSheet.create({
     width: 60,
     height: 60,
   },
-  garotaLendo: {
-    resizeMode: "contain",
-    width: 200,
-    height: 200,
-  },
+
   viewTexto: {
     margin: 10,
   },
@@ -114,5 +126,59 @@ const estilos = StyleSheet.create({
     color: "white",
     fontFamily: "roboto",
     textAlign: "center",
+  },
+  livroCard: {
+    backgroundColor: "#D9D9D9",
+    height: "75%",
+    width: "70%",
+  },
+  livroBackground: {
+    height: "80%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  fundoAlternativo: {
+    height: "70%",
+    width: "75%",
+  },
+  titulo: {
+    marginVertical: 8,
+    backgroundColor: "#5A3F26",
+    justifyContent: "center",
+    height: 30,
+  },
+  textoTitulo: {
+    color: "white",
+    textAlign: "center",
+    textTransform: "uppercase",
+    fontSize: 18,
+  },
+  yellowButtonsView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  yellowButtons: {
+    backgroundColor: "#EEBF33",
+    border: 1,
+    borderColor: "#402914",
+    width: "49%",
+    padding: 8,
+    marginBottom: 8,
+  },
+  brownText: {
+    color: "#402914",
+    textAlign: "center",
+  },
+  escolherBotao: {
+    backgroundColor: "#177567",
+    padding: 8,
+    borderRadius: 3,
+    textAlign: "center",
+  },
+  texto: {
+    fontSize: 18,
+    fontFamily: "roboto",
+    textAlign: "center",
+    color: "white",
   },
 });

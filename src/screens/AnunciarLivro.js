@@ -40,7 +40,7 @@ const AnunciarLivro = () => {
           style={styles.inputDois}
           editable
           multiline
-          autoFocus={true}
+          autoFocus={false}
           blurOnSubmit={true}
           placeholder="Descrição"
           numberOfLines={4}
@@ -106,8 +106,6 @@ const styles = StyleSheet.create({
   formView: {
     height: "50%",
     width: "90%",
-    flexDirection: "column",
-    justifyContent: "space-around",
   },
   inputUm: {
     height: 40,
