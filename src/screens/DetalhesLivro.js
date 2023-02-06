@@ -3,8 +3,14 @@ import React from "react";
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
+import { useFonts } from "expo-font";
 
 const DetalhesLivro = () => {
+  const [fonteCarregada] = useFonts({
+    roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
+  });
+  if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
+
   return (
     <>
       <StatusBar style={estilos.caixa} />
@@ -26,6 +32,37 @@ const DetalhesLivro = () => {
             </Pressable>
           </View>
         </View>
+
+        <View style={estilos.infos}>
+          <Text>Ano</Text>
+          <Text> </Text>
+          <Text>|</Text>
+          <Text> </Text>
+          <Text>Gênero</Text>
+          <Text> </Text>
+          <Text>|</Text>
+          <Text> </Text>
+          <Text>Dono</Text>
+        </View>
+
+        <View>
+          <Text>Descrição:</Text>
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut
+            commodo sem. Donec sed auctor nisl. Proin varius ipsum risus, ut
+            porta leo aliquet sed. Curabitur ultricies efficitur cursus. Aenean
+            commodo tincidunt risus, ac dictum eros feugiat ac. Interdum et
+            malesuada fames ac ante ipsum primis in faucibus. Morbi ultrices
+            efficitur mattis. Sed vitae commodo dolor. Pellentesque habitant
+            morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas. Integer hendrerit erat velit, vitae tempor diam dictum nec.
+            Fusce non est mollis tellus eleifend lobortis eget vitae dolor.
+            Etiam congue, lorem et lobortis semper, erat felis tincidunt ligula,
+            sit amet auctor lorem augue vel ligula. Morbi semper, nibh a
+            faucibus rhoncus, sem nibh interdum purus, in commodo nunc dui quis
+            lacus. In hac habitasse platea dictumst.{" "}
+          </Text>
+        </View>
       </SafeAreaView>
     </>
   );
@@ -41,7 +78,6 @@ const estilos = StyleSheet.create({
   caixa: {
     marginVertical: 20,
     backgroundColor: "#EBE8E1",
-    height: 300,
     width: "90%",
     borderColor: "black",
     borderWidth: 3,
@@ -50,6 +86,7 @@ const estilos = StyleSheet.create({
     backgroundColor: "grey",
     justifyContent: "center",
     alignItems: "center",
+    height: 50,
   },
   fotoContainer: {
     height: 220,
@@ -57,6 +94,7 @@ const estilos = StyleSheet.create({
     justifyContent: "center",
   },
   botoes: {
+    marginVertical: 5,
     flexDirection: "row",
     justifyContent: "space-around",
   },
@@ -70,6 +108,8 @@ const estilos = StyleSheet.create({
   },
   textoEscolher: {
     color: "white",
+    fontFamily: "roboto",
+    textAlign: "center",
   },
   favoritar: {
     width: 50,
@@ -78,5 +118,8 @@ const estilos = StyleSheet.create({
     padding: 8,
     borderRadius: 3,
     textAlign: "center",
+  },
+  infos: {
+    flexDirection: "row",
   },
 });
