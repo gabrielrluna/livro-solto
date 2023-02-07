@@ -1,8 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Ionicons } from "@expo/vector-icons";
 
 //Import de todas as screens
 import Home from "./Home";
@@ -12,6 +9,8 @@ import Favoritos from "./Favoritos";
 import Perfil from "./Perfil";
 import DetalhesLivro from "./DetalhesLivro";
 import ListaLivros from "./ListaLivros";
+import Sobre from "./Sobre";
+import Privacidade from "./Privacidade";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +30,16 @@ export function HomeStack() {
       <Stack.Screen
         component={ListaLivros}
         name="ListaLivrosStack"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        component={Sobre}
+        name="SobreStack"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        component={Privacidade}
+        name="PrivacidadeStack"
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

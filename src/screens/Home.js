@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import {
   Pressable,
   Image,
@@ -6,18 +5,22 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
+  Modal,
 } from "react-native";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
 
 import { Entypo } from "@expo/vector-icons";
+import { useState } from "react";
 
 import logo from "../../assets/images/logo.png";
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
-import Sobre from "./Sobre";
-import Privacidade from "./Privacidade";
+
+import { ActionModal } from "../components/ActionModal";
 
 const Home = ({ navigation }) => {
+  const [visibleModal, setVisibleModal] = useState(false);
   const [fonteCarregada] = useFonts({
     roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
   });
@@ -38,15 +41,18 @@ const Home = ({ navigation }) => {
 
         <Image style={styles.logo} source={logo} />
 
-        {/* <Pressable
-          style={styles.botoes}
-          onPress={() => {
-            navigation.navigate("Privacidade");
-          }}
+        <TouchableOpacity onPress={() => setVisibleModal(true)}>
+          <Entypo name="dots-three-vertical" size={24} color="black" />
+        </TouchableOpacity>
+
+        <Modal
+          visible={visibleModal}
+          transparent={true}
+          onRequestClose={() => setVisibleModal(false)}
+          animationType="slide"
         >
-          <Text style={styles.textoBotao}>Privacidade</Text>
-        </Pressable> */}
-        <Entypo name="dots-three-vertical" size={24} color="black" />
+          <ActionModal fecharModal={() => setVisibleModal(false)} />
+        </Modal>
       </View>
 
       <View style={styles.livroCard}>
