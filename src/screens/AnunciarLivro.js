@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   inputUm: {
+    marginVertical: 5,
     height: 40,
     borderWidth: 1,
     padding: 10,
@@ -115,6 +116,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   inputDois: {
+    marginVertical: 10,
     borderWidth: 1,
     padding: 10,
     backgroundColor: "white",
@@ -141,7 +143,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   enviarBotao: {
-    // margin: 10,
+    marginVertical: 10,
     padding: 10,
     borderRadius: 3,
     backgroundColor: "#177567",
