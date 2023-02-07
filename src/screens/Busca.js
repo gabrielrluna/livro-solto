@@ -93,21 +93,12 @@ const styles = StyleSheet.create({
   },
   livroCard: {
     backgroundColor: "#D9D9D9",
-    height: "60%",
-    width: "60%",
-
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.21,
-    shadowRadius: 6.65,
-    elevation: 9,
+    height: "80%",
+    width: "70%",
   },
   livroBackground: {
     height: "80%",
-    alignItems: "center",
+    alignzItems: "center",
     justifyContent: "center",
   },
   fundoAlternativo: {
