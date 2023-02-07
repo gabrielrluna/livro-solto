@@ -16,7 +16,13 @@ import Sobre from "./src/screens/Sobre";
 import HomeTeste from "./src/screens/HomeTeste";
 
 /* Stack  */
-import { HomeStack } from "./src/screens/Stack";
+import {
+  HomeStack,
+  AnunciarLivroStack,
+  BuscaStack,
+  FavoritosStack,
+  PerfilStack,
+} from "./src/screens/Stack";
 import { Ionicons } from "@expo/vector-icons";
 import { func } from "prop-types";
 
@@ -77,24 +83,24 @@ const App = () => {
             options={{ headerShown: false }}
           />
           <Tab.Screen
-            component={AnunciarLivro}
+            component={AnunciarLivroStack}
             name="Anunciar Livro"
             options={{ headerShown: false }}
           />
           <Tab.Screen
-            component={Busca}
+            component={BuscaStack}
             name="Busca"
             options={{ headerShown: false }}
           />
 
           <Tab.Screen
-            component={Favoritos}
+            component={FavoritosStack}
             name="Favoritos"
             options={{ headerShown: false }}
           />
 
           <Tab.Screen
-            component={Perfil}
+            component={PerfilStack}
             name="Perfil"
             options={{ headerShown: false }}
           />

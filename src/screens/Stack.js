@@ -4,7 +4,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 
+//Import de todas as screens
 import Home from "./Home";
+import Busca from "./Busca";
+import AnunciarLivro from "./AnunciarLivro";
+import Favoritos from "./Favoritos";
+import Perfil from "./Perfil";
 import DetalhesLivro from "./DetalhesLivro";
 import ListaLivros from "./ListaLivros";
 
@@ -35,7 +40,6 @@ export function HomeStack() {
 export function AnunciarLivroStack() {
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen component={Home} name="Home" />
       <Stack.Screen
         component={AnunciarLivro}
         name="AnunciarLivroStack"
@@ -45,4 +49,39 @@ export function AnunciarLivroStack() {
   );
 }
 
+export function BuscaStack() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        component={Busca}
+        name="BuscaStack"
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+export function FavoritosStack() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        component={Favoritos}
+        name="FavoritosStack"
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+export function PerfilStack() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        component={Perfil}
+        name="PerfilStack"
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
 const estilos = StyleSheet.create({});
