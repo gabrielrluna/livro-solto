@@ -6,6 +6,7 @@ import {
   TextInput,
   Image,
   Pressable,
+  Alert,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import imagePlaceholder from "../../assets/images/imagePlaceholder.png";
@@ -20,6 +21,25 @@ const AnunciarLivro = () => {
     { label: "Romance", value: "romance" },
     { label: "Didático", value: "didatico" },
   ]);
+  const enviar = () => {
+    Alert.alert(
+      "Certeza que quer enviar?",
+      "Ao clicar você disponibiliza o livro",
+      [
+        {
+          text: "cancelar",
+          onPress: () => {
+            return false;
+          },
+          style: "cancel",
+        },
+        {
+          text: "sim, enviar",
+          style: "destructive",
+        },
+      ]
+    );
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageView}>
@@ -72,7 +92,7 @@ const AnunciarLivro = () => {
           </View>
         </View>
 
-        <Pressable style={styles.enviarBotao}>
+        <Pressable onPress={enviar} style={styles.enviarBotao}>
           <Text style={styles.texto}>Enviar</Text>
         </Pressable>
       </View>
