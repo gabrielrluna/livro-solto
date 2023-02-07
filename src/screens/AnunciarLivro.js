@@ -40,6 +40,7 @@ const AnunciarLivro = () => {
       ]
     );
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageView}>
@@ -79,7 +80,6 @@ const AnunciarLivro = () => {
               translation={{
                 PLACEHOLDER: "Selecione",
               }}
-              // style={{ width: "50%" }}
             />
           </View>
           <View style={{ width: "49%" }}>
