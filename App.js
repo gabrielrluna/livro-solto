@@ -3,18 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import AnunciarLivro from "./src/screens/AnunciarLivro";
-import Busca from "./src/screens/Busca";
-import Chat from "./src/screens/Chat";
-import Favoritos from "./src/screens/Favoritos";
-import Home from "./src/screens/Home";
-import ListaLivros from "./src/screens/ListaLivros";
-import DetalhesLivro from "./src/screens/DetalhesLivro";
-import Perfil from "./src/screens/Perfil";
-import Privacidade from "./src/screens/Privacidade";
-import Sobre from "./src/screens/Sobre";
-import HomeTeste from "./src/screens/HomeTeste";
-
 /* Stack  */
 import {
   HomeStack,
@@ -24,11 +12,9 @@ import {
   PerfilStack,
 } from "./src/screens/Stack";
 import { Ionicons } from "@expo/vector-icons";
-import { func } from "prop-types";
 
 const App = () => {
   const Tab = createBottomTabNavigator();
-  const Stack = createStackNavigator();
 
   return (
     <>
