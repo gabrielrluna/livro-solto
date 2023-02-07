@@ -15,7 +15,7 @@ import { FontAwesome } from "@expo/vector-icons";
 
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
 
-const Busca = () => {
+const Busca = ({ navigation }) => {
   const [fonteCarregada] = useFonts({
     roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
   });
@@ -42,10 +42,29 @@ const Busca = () => {
         <View style={styles.titulo}>
           <Text style={styles.textoTitulo}>TITULO CAPITALIZE</Text>
         </View>
+        <View style={styles.yellowButtonsView}>
+          <Pressable
+            style={styles.yellowButtons}
+            onPress={() => {
+              navigation.navigate("DetalhesLivro");
+            }}
+          >
+            <Text style={styles.brownText}>
+              <AntDesign name="infocirlceo" size={16} color="#5A3F26" />
+              {""} Detalhes
+            </Text>
+          </Pressable>
+          <Pressable style={styles.yellowButtons}>
+            <Text style={styles.brownText}>
+              <AntDesign name="hearto" size={16} color="#5A3F26" />
+              {""} Favoritar
+            </Text>
+          </Pressable>
+        </View>
         <Pressable style={styles.escolherBotao}>
           <Text style={styles.texto}>
-            <AntDesign name="pluscircle" size={20} color="white" />
-            Escolher
+            <AntDesign name="pluscircle" size={18} color="white" />
+            {""} Escolher
           </Text>
         </Pressable>
       </View>
@@ -93,21 +112,22 @@ const styles = StyleSheet.create({
   },
   livroCard: {
     backgroundColor: "#D9D9D9",
-    height: "80%",
-    width: "70%",
+    height: "60%",
+    width: "60%",
+    marginVertical: 8,
   },
   livroBackground: {
     height: "80%",
-    alignzItems: "center",
+    alignItems: "center",
     justifyContent: "center",
   },
   fundoAlternativo: {
-    height: "80%",
-    width: "70%",
+    height: "70%",
+    width: "75%",
   },
   titulo: {
     marginVertical: 8,
-    backgroundColor: "#262521",
+    backgroundColor: "#5A3F26",
     justifyContent: "center",
     height: 30,
   },
@@ -116,6 +136,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textTransform: "uppercase",
     fontSize: 18,
+  },
+  yellowButtonsView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  yellowButtons: {
+    backgroundColor: "#EEBF33",
+    border: 1,
+    borderColor: "#402914",
+    width: "49%",
+    padding: 8,
+    marginBottom: 8,
+  },
+  brownText: {
+    color: "#402914",
+    textAlign: "center",
   },
   escolherBotao: {
     backgroundColor: "#177567",

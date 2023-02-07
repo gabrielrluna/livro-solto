@@ -13,28 +13,28 @@ const DetalhesLivro = () => {
 
   return (
     <>
-      <StatusBar style={estilos.caixa} />
-      <SafeAreaView style={estilos.container}>
-        <View style={estilos.caixa}>
-          <View style={estilos.fotoContainer}></View>
-          <View style={estilos.nome}>
-            <Text>Titulo - Autor</Text>
+      <StatusBar style={styles.caixa} />
+      <SafeAreaView style={styles.container}>
+        <View style={styles.caixa}>
+          <View style={styles.fotoContainer}></View>
+          <View style={styles.nome}>
+            <Text>Titulo</Text>
           </View>
-          <View style={estilos.botoes}>
-            <Pressable style={estilos.favoritar}>
-              <AntDesign name="hearto" size={24} color="#402914" />
+          <View style={styles.botoes}>
+            <Pressable style={styles.favoritar}>
+              <AntDesign name="hearto" size={16} color="#402914" />
             </Pressable>
-            <Pressable style={estilos.escolher}>
-              <Text style={estilos.textoEscolher}>
-                <AntDesign name="pluscircle" size={24} color="white" />
+            <Pressable style={styles.escolher}>
+              <Text style={styles.textoEscolher}>
+                <AntDesign name="pluscircle" size={16} color="white" />
                 {""} Escolher
               </Text>
             </Pressable>
           </View>
         </View>
 
-        <View style={estilos.infos}>
-          <Text>Ano</Text>
+        <View style={styles.infos}>
+          <Text>Autor</Text>
           <Text> </Text>
           <Text>|</Text>
           <Text> </Text>
@@ -46,21 +46,14 @@ const DetalhesLivro = () => {
         </View>
 
         <View>
-          <Text>Descrição:</Text>
-          <Text>
+          <Text style={styles.descTitle}>Descrição:</Text>
+          <Text style={styles.descText}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut
             commodo sem. Donec sed auctor nisl. Proin varius ipsum risus, ut
             porta leo aliquet sed. Curabitur ultricies efficitur cursus. Aenean
             commodo tincidunt risus, ac dictum eros feugiat ac. Interdum et
             malesuada fames ac ante ipsum primis in faucibus. Morbi ultrices
-            efficitur mattis. Sed vitae commodo dolor. Pellentesque habitant
-            morbi tristique senectus et netus et malesuada fames ac turpis
-            egestas. Integer hendrerit erat velit, vitae tempor diam dictum nec.
-            Fusce non est mollis tellus eleifend lobortis eget vitae dolor.
-            Etiam congue, lorem et lobortis semper, erat felis tincidunt ligula,
-            sit amet auctor lorem augue vel ligula. Morbi semper, nibh a
-            faucibus rhoncus, sem nibh interdum purus, in commodo nunc dui quis
-            lacus. In hac habitasse platea dictumst.{" "}
+            efficitur mattis. Sed vitae commodo dolor.
           </Text>
         </View>
       </SafeAreaView>
@@ -70,10 +63,11 @@ const DetalhesLivro = () => {
 
 export default DetalhesLivro;
 
-const estilos = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
+    padding: 8,
   },
   caixa: {
     marginVertical: 20,
@@ -83,7 +77,7 @@ const estilos = StyleSheet.create({
     borderWidth: 3,
   },
   nome: {
-    backgroundColor: "grey",
+    backgroundColor: "#D9D9D9",
     justifyContent: "center",
     alignItems: "center",
     height: 50,
@@ -95,31 +89,43 @@ const estilos = StyleSheet.create({
   },
   botoes: {
     marginVertical: 5,
+    padding: 8,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
   },
   escolher: {
     width: 100,
-    height: 50,
+    height: 40,
     backgroundColor: "#177567",
     padding: 8,
     borderRadius: 3,
     textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
   textoEscolher: {
     color: "white",
+    fontSize: 16,
     fontFamily: "roboto",
     textAlign: "center",
   },
   favoritar: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     backgroundColor: "#EEBF33",
     padding: 8,
     borderRadius: 3,
     textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
   infos: {
     flexDirection: "row",
+  },
+  descTitle: {
+    fontWeight: "bold",
+  },
+  descText: {
+    textAlign: "justify",
   },
 });
