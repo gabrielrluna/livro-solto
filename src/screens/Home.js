@@ -9,11 +9,13 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
+
+import { Entypo } from "@expo/vector-icons";
 
 import logo from "../../assets/images/logo.png";
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
+import Sobre from "./Sobre";
+import Privacidade from "./Privacidade";
 
 const Home = ({ navigation }) => {
   const [fonteCarregada] = useFonts({
@@ -25,25 +27,26 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.barraLogo}>
-        <Pressable
+        {/* <Pressable
           style={styles.botoes}
           onPress={() => {
             navigation.navigate("Sobre");
           }}
         >
           <Text style={styles.textoBotao}>Sobre</Text>
-        </Pressable>
+        </Pressable> */}
 
         <Image style={styles.logo} source={logo} />
 
-        <Pressable
+        {/* <Pressable
           style={styles.botoes}
           onPress={() => {
             navigation.navigate("Privacidade");
           }}
         >
           <Text style={styles.textoBotao}>Privacidade</Text>
-        </Pressable>
+        </Pressable> */}
+        <Entypo name="dots-three-vertical" size={24} color="black" />
       </View>
 
       <View style={styles.livroCard}>
