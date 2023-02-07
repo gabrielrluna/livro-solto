@@ -14,6 +14,9 @@ import Perfil from "./src/screens/Perfil";
 import Privacidade from "./src/screens/Privacidade";
 import Sobre from "./src/screens/Sobre";
 import HomeTeste from "./src/screens/HomeTeste";
+
+/* Stack  */
+import { HomeStack } from "./src/screens/Stack";
 import { Ionicons } from "@expo/vector-icons";
 import { func } from "prop-types";
 
@@ -27,6 +30,7 @@ const App = () => {
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
+            unmountOnBlur: true,
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
 
@@ -68,7 +72,7 @@ const App = () => {
           })}
         >
           <Tab.Screen
-            component={Home}
+            component={HomeStack}
             name="Home"
             options={{ headerShown: false }}
           />
@@ -92,11 +96,6 @@ const App = () => {
           <Tab.Screen
             component={Perfil}
             name="Perfil"
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            component={DetalhesLivro}
-            name="DetalhesLivro"
             options={{ headerShown: false }}
           />
         </Tab.Navigator>

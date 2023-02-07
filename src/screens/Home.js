@@ -57,7 +57,7 @@ const Home = ({ navigation }) => {
           <Pressable
             style={styles.yellowButtons}
             onPress={() => {
-              navigation.navigate("DetalhesLivro");
+              navigation.navigate("DetalhesLivroStack");
             }}
           >
             <Text style={styles.brownText}>

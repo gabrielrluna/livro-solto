@@ -6,27 +6,43 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Home from "./Home";
 import DetalhesLivro from "./DetalhesLivro";
+import ListaLivros from "./ListaLivros";
 
-export default function Diso() {
-  const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
+export function HomeStack() {
   return (
-    <>
-      <StatusBar />
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-		<Stack.Screen component={Home} name="Home" />
-          <Stack.Screen
-            component={DetalhesLivro}
-            name="DetalhesLivro"
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </>
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        component={Home}
+        name="HomeStack"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        component={DetalhesLivro}
+        name="DetalhesLivroStack"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        component={ListaLivros}
+        name="ListaLivrosStack"
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
   );
 }
 
-export default Diso;
+export function AnunciarLivroStack() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen component={Home} name="Home" />
+      <Stack.Screen
+        component={AnunciarLivro}
+        name="AnunciarLivroStack"
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 const estilos = StyleSheet.create({});
