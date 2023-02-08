@@ -66,6 +66,11 @@ export function BuscaStack() {
         name="BuscaStack"
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        component={DetalhesLivro}
+        name="DetalhesLivroStack"
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
