@@ -73,7 +73,7 @@ const Home = ({ navigation }) => {
         </Modal>
       </View>
 
-      {livrosTemp.map(({ id, titulo, genero, descricao, dono, capa }) => (
+      {livrosTemp.map(({ id, titulo, capa }) => (
         <View style={styles.livroCard} key={id}>
           <View style={styles.livroBackground}>
             {{ capa } && (
