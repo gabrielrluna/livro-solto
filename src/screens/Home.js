@@ -19,7 +19,7 @@ import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
 
 import { ActionModal } from "../components/ActionModal";
 
-import serverApi from "../";
+import serverApi from "../services/servidor-api";
 
 const Home = ({ navigation }) => {
   console.log(serverApi);
@@ -73,7 +73,7 @@ const Home = ({ navigation }) => {
         </Modal>
       </View>
 
-      {postsTemp.map(({ id, titulo, genero, descricao, dono, capa }) => (
+      {livrosTemp.map(({ id, titulo, genero, descricao, dono, capa }) => (
         <View style={styles.livroCard} key={id}>
           <View style={styles.livroBackground}>
             {{ capa } && (
