@@ -2,27 +2,27 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import express from "express";
-import cors from "cors";
+// import express from "express";
+// import cors from "cors";
 
-const app = express();
-const porta = process.env.PORT || 3000;
+// const app = express();
+// const porta = process.env.PORT || 2112;
 
-//Configurar requisições de diferentes origens CORS
-app.use(cors());
+// //Configurar requisições de diferentes origens CORS
+// app.use(cors());
 
-//Configurar suporte a JSON
-app.use(express.json());
+// //Configurar suporte a JSON
+// app.use(express.json());
 
-//Configurar suporte a dados de imputs e formulários
-app.use(express.urlencoded({ extended: true }));
+// //Configurar suporte a dados de imputs e formulários
+// app.use(express.urlencoded({ extended: true }));
 
-//ROTAS
+// //ROTAS
 
-//Raiz da API
-app.get("/", (req, res) => {
-  res.setDefaultEncoding(`Página Inicial da API`);
-});
+// //Raiz da API
+// app.get("/", (req, res) => {
+//   res.setDefaultEncoding(`Página Inicial da API`);
+// });
 
 /* Stack  */
 import {
