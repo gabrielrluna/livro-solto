@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "api": "json-server --watch db.json --port 2112"
   },
   "dependencies": {
     "@react-native-picker/picker": "^2.4.8",
