@@ -19,7 +19,25 @@ import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
 
 import { ActionModal } from "../components/ActionModal";
 
+import serverApi from "../";
+
 const Home = ({ navigation }) => {
+  console.log(serverApi);
+
+  const livrosTemp = [];
+
+  const getLivros = async () => {
+    try {
+      const resposta = await fetch(`${serverApi}/livros`);
+      const dados = await resposta.json();
+      console.log(dados);
+    } catch (error) {
+      console.log("Deu ruim aí hein chapa " + error.message);
+    }
+  };
+
+  getLivros();
+
   const [visibleModal, setVisibleModal] = useState(false);
   const [fonteCarregada] = useFonts({
     roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
@@ -55,39 +73,46 @@ const Home = ({ navigation }) => {
         </Modal>
       </View>
 
-      <View style={styles.livroCard}>
-        <View style={styles.livroBackground}>
-          <Image source={fundoAlternativo} style={styles.fundoAlternativo} />
-        </View>
-        <View style={styles.titulo}>
-          <Text style={styles.textoTitulo}>TITULO CAPITALIZE</Text>
-        </View>
-        <View style={styles.yellowButtonsView}>
-          <Pressable
-            style={styles.yellowButtons}
-            onPress={() => {
-              navigation.navigate("DetalhesLivroStack");
-            }}
-          >
-            <Text style={styles.brownText}>
-              <AntDesign name="infocirlceo" size={16} color="#5A3F26" />
-              {""} Detalhes
+      {postsTemp.map(({ id, titulo, genero, descricao, dono, capa }) => (
+        <View style={styles.livroCard} key={id}>
+          <View style={styles.livroBackground}>
+            {{ capa } && (
+              <Image
+                source={fundoAlternativo}
+                style={styles.fundoAlternativo}
+              />
+            )}
+          </View>
+          <View style={styles.titulo}>
+            <Text style={styles.textoTitulo}>{titulo}</Text>
+          </View>
+          <View style={styles.yellowButtonsView}>
+            <Pressable
+              style={styles.yellowButtons}
+              onPress={() => {
+                navigation.navigate("DetalhesLivroStack");
+              }}
+            >
+              <Text style={styles.brownText}>
+                <AntDesign name="infocirlceo" size={16} color="#5A3F26" />
+                {""} Detalhes
+              </Text>
+            </Pressable>
+            <Pressable style={styles.yellowButtons}>
+              <Text style={styles.brownText}>
+                <AntDesign name="hearto" size={16} color="#5A3F26" />
+                {""} Favoritar
+              </Text>
+            </Pressable>
+          </View>
+          <Pressable style={styles.escolherBotao}>
+            <Text style={styles.texto}>
+              <AntDesign name="pluscircle" size={18} color="white" />
+              {""} Escolher
             </Text>
           </Pressable>
-          <Pressable style={styles.yellowButtons}>
-            <Text style={styles.brownText}>
-              <AntDesign name="hearto" size={16} color="#5A3F26" />
-              {""} Favoritar
-            </Text>
-          </Pressable>
         </View>
-        <Pressable style={styles.escolherBotao}>
-          <Text style={styles.texto}>
-            <AntDesign name="pluscircle" size={18} color="white" />
-            {""} Escolher
-          </Text>
-        </Pressable>
-      </View>
+      ))}
     </SafeAreaView>
   );
 };

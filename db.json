@@ -1,0 +1,73 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nome": "luna",
+      "email": "luna@luna.com",
+      "senha": "luna@123",
+      "senac": "penha",
+      "periodo": "manhã",
+      "foto": "../../assets/images/fotos/luna.jpg"
+    },
+
+    {
+      "id": 2,
+      "nome": "vero",
+      "email": "vero@vero.com",
+      "senha": "vero@123",
+      "senac": "penha",
+      "periodo": "manhã",
+      "foto": "../../assets/images/fotos/vero.jpg"
+    },
+
+    {
+      "id": 3,
+      "nome": "gui",
+      "email": "gui@gui.com",
+      "senha": "gui@123",
+      "senac": "penha",
+      "periodo": "manhã",
+      "foto": "../../assets/images/fotos/gui.jpg"
+    }
+  ],
+
+  "livros": [
+    {
+      "id": 1,
+      "titulo": "morro dos ventos uivantes",
+      "genero": "romance",
+      "descricao": "um livro muito legal de romance cliche",
+      "dono": 3,
+      "capa": "../../assets/images/capas/morro.jpg"
+    },
+
+    {
+      "id": 2,
+      "titulo": "palavras, palavrisnhas e palavrões",
+      "genero": "infantil",
+      "descricao": "um livro muito legal infantil cliche",
+      "dono": 3,
+      "capa": "../../assets/images/capas/palavras.jpg"
+    },
+    {
+      "id": 3,
+      "titulo": "um guia para a vida",
+      "genero": "autoajuda",
+      "descricao": "um livro muito legal autoajuda cliche",
+      "dono": 2,
+      "capa": "../../assets/images/capas/house.jpg"
+    }
+  ],
+
+  "userLivrosInteresse": [
+    {
+      "user_id": 1,
+      "livro_id": 3
+    },
+
+    {
+      "user_id": 2,
+      "livro_id": 2
+    }
+  ]
+}
