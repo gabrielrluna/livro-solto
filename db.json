@@ -37,6 +37,7 @@
       "titulo": "morro dos ventos uivantes",
       "genero": "romance",
       "descricao": "um livro muito legal de romance cliche",
+      "status": 1,
       "dono": 3,
       "capa": "../../assets/images/capas/morro.jpg"
     },
@@ -46,6 +47,7 @@
       "titulo": "palavras, palavrisnhas e palavrões",
       "genero": "infantil",
       "descricao": "um livro muito legal infantil cliche",
+      "status": 1,
       "dono": 3,
       "capa": "../../assets/images/capas/palavras.jpg"
     },
@@ -54,6 +56,7 @@
       "titulo": "um guia para a vida",
       "genero": "autoajuda",
       "descricao": "um livro muito legal autoajuda cliche",
+      "status": 1,
       "dono": 2,
       "capa": "../../assets/images/capas/house.jpg"
     }
