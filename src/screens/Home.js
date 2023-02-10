@@ -24,19 +24,19 @@ import serverApi from "../services/servidor-api";
 const Home = ({ navigation }) => {
   console.log(serverApi);
 
-  const livrosTemp = [];
-
-  const getLivros = async () => {
-    try {
-      const resposta = await fetch(`${serverApi}/livros`);
-      const dados = await resposta.json();
-      console.log(dados);
-    } catch (error) {
-      console.log("Deu ruim aí hein chapa " + error.message);
-    }
-  };
-
-  getLivros();
+  const [livros, setLivros] = useState([]);
+  useEffect(() => {
+    const getLivros = async () => {
+      try {
+        const resposta = await fetch(`${serverApi}/livros`);
+        const dados = await resposta.json();
+        console.log(dados);
+      } catch (error) {
+        console.log("Deu ruim aï¿½ hein chapa " + error.message);
+      }
+    };
+    getLivros();
+  });
 
   const [visibleModal, setVisibleModal] = useState(false);
   const [fonteCarregada] = useFonts({
@@ -73,7 +73,7 @@ const Home = ({ navigation }) => {
         </Modal>
       </View>
 
-      {livrosTemp.map(({ id, titulo, capa }) => (
+      {livros.map(({ id, titulo, capa }) => (
         <View style={styles.livroCard} key={id}>
           <View style={styles.livroBackground}>
             {{ capa } && (
