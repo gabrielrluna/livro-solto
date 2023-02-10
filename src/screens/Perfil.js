@@ -5,12 +5,29 @@ import {
   SafeAreaView,
   Image,
   Pressable,
+  Button,
 } from "react-native";
 import fotoAlternativa from "../../assets/images/fotoAlternativa.png";
 import { AntDesign } from "@expo/vector-icons";
 import garotaLendo from "../../assets/images/garota-lendo.png";
 
+import { auth } from "../../firebaseConfig";
+import { signOut } from "firebase/auth";
+
 const Perfil = () => {
+  const usuarioLogado = auth.currentUser;
+  console.log(usuarioLogado);
+
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        navigation.replace("Inicial");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.cardPerfil}>
@@ -26,6 +43,7 @@ const Perfil = () => {
 
       <View style={styles.imagemHome}>
         <Image style={styles.garotaLendo} source={garotaLendo} />
+        <Button title="Logout" color="#D35400" onPress={logout} />
       </View>
 
       <View style={styles.chatView}>

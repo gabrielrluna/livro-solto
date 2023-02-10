@@ -16,6 +16,7 @@ import { useState } from "react";
 
 import logo from "../../assets/images/logo.png";
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
+import { useEffect } from "react";
 
 import { ActionModal } from "../components/ActionModal";
 

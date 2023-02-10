@@ -31,7 +31,10 @@ import {
   BuscaStack,
   FavoritosStack,
   PerfilStack,
+  LoginStack,
+  CadastroStack,
 } from "./src/screens/Stack";
+
 import { Ionicons } from "@expo/vector-icons";
 
 const App = () => {
@@ -109,6 +112,18 @@ const App = () => {
           <Tab.Screen
             component={PerfilStack}
             name="Perfil"
+            options={{ headerShown: false }}
+          />
+
+          <Tab.Screen
+            component={LoginStack}
+            name="Login"
+            options={{ headerShown: false }}
+          />
+
+          <Tab.Screen
+            component={CadastroStack}
+            name="Cadastro"
             options={{ headerShown: false }}
           />
         </Tab.Navigator>

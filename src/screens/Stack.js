@@ -11,6 +11,8 @@ import DetalhesLivro from "./DetalhesLivro";
 import ListaLivros from "./ListaLivros";
 import Sobre from "./Sobre";
 import Privacidade from "./Privacidade";
+import Login from "./Login";
+import Cadastro from "./Cadastro";
 
 const Stack = createNativeStackNavigator();
 
@@ -98,4 +100,29 @@ export function PerfilStack() {
     </Stack.Navigator>
   );
 }
+
+export function LoginStack() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        component={Login}
+        name="LoginStack"
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+export function CadastroStack() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        component={Cadastro}
+        name="CadastroStack"
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 const estilos = StyleSheet.create({});
