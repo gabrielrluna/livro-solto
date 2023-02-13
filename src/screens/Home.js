@@ -22,22 +22,39 @@ import { ActionModal } from "../components/ActionModal";
 
 import serverApi from "../api/serverApi";
 
-const Home = ({ livro }) => {
-  console.log(serverApi);
-
+const Home = ({ genero }) => {
   const [livros, setLivros] = useState([]);
   useEffect(() => {
-    const getLivros = async () => {
+    async function getLivros() {
       try {
         const resposta = await fetch(`${serverApi}/livros.json`);
         const dados = await resposta.json();
-        console.log(dados);
+
+        let listaDeLivros = [];
+
+        for (const livro in dados) {
+          const objetoLivro = {
+            id: livro,
+            titulo: dados[livro].titulo,
+            capa: dados[livro].capa,
+            descricao: dados[livro].descricao,
+            genero: dados[livro].genero,
+            dono: dados[livro].dono,
+          };
+          listaDeLivros.push(objetoLivro);
+          if (genero) {
+            listaDeLivros = listaDeLivros.filter(
+              (cadaLivro) => cadaLivro.genero === genero
+            );
+          }
+        }
+        setLivros(listaDeLivros);
       } catch (error) {
         console.log("Deu ruim aí hein chapa " + error.message);
       }
-    };
+    }
     getLivros();
-  });
+  }, [genero]);
 
   const [visibleModal, setVisibleModal] = useState(false);
   const [fonteCarregada] = useFonts({
@@ -74,10 +91,18 @@ const Home = ({ livro }) => {
         </Modal>
       </View>
 
-      {livros.map(({ id, titulo, capa }) => (
-        <View style={styles.livroCard} key={id}>
+      {livros.map(({ id, titulo, genero, dono, capa }) => (
+        <View
+          style={styles.livroCard}
+          key={id}
+          id={id}
+          titulo={titulo}
+          dono={dono}
+          genero={genero}
+          capa={capa}
+        >
           <View style={styles.livroBackground}>
-            {{ capa } && (
+            {capa && (
               <Image
                 source={fundoAlternativo}
                 style={styles.fundoAlternativo}
