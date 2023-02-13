@@ -22,18 +22,18 @@ import { ActionModal } from "../components/ActionModal";
 
 import serverApi from "../api/serverApi";
 
-const Home = ({ navigation }) => {
+const Home = ({ livro }) => {
   console.log(serverApi);
 
   const [livros, setLivros] = useState([]);
   useEffect(() => {
     const getLivros = async () => {
       try {
-        const resposta = await fetch(`${serverApi}/livros`);
+        const resposta = await fetch(`${serverApi}/livros.json`);
         const dados = await resposta.json();
         console.log(dados);
       } catch (error) {
-        console.log("Deu ruim a� hein chapa " + error.message);
+        console.log("Deu ruim aí hein chapa " + error.message);
       }
     };
     getLivros();
