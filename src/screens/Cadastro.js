@@ -10,9 +10,21 @@ import {
 
 import { auth } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const Cadastro = ({ navigation }) => {
   const [nome, setNome] = useState("");
+  const [senac, setSenac] = useState("");
+  const [periodo, setPeriodo] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: "Manhã", value: "manhã" },
+    { label: "Tarde", value: "tarde" },
+    { label: "Noite", value: "noite" },
+  ]);
+
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,27 +36,19 @@ const Cadastro = ({ navigation }) => {
     }
 
     setLoading(true);
-    createUserWithEmailAndPassword(auth, email, senha)
+    createUserWithEmailAndPassword(auth, email, senha, senac, periodo)
       .then(() => {
         /* Ao fazer a criação do novo usuário (com email e senha), aproveitamos para atualizar
         via updateProfile a propriedade do auth que permite adicionar um nome ao usuário */
         updateProfile(auth.currentUser, {
           displayName: nome,
+          senac,
+          periodo,
         });
 
         Alert.alert("Cadastro", "Conta criada com sucesso!", [
           {
-            text: "Não, me deixe aqui mesmo",
-            onPress: () => {
-              // setEmail("");
-              // setSenha("");
-              // return false;
-              navigation.replace("Cadastro");
-            },
-            style: "cancel",
-          },
-          {
-            text: "Sim, bora lá!",
+            text: "Acessar Perfil",
             onPress: () => {
               navigation.replace("Perfil");
             },
@@ -85,6 +89,26 @@ const Cadastro = ({ navigation }) => {
           style={estilos.input}
           onChangeText={(valor) => setNome(valor)}
         />
+        <TextInput
+          placeholder="Senac"
+          style={estilos.input}
+          onChangeText={(valor) => setSenac(valor)}
+        />
+
+        <View>
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            translation={{
+              PLACEHOLDER: "Período",
+            }}
+          />
+        </View>
+
         <TextInput
           placeholder="E-mail"
           style={estilos.input}
