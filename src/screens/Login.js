@@ -83,7 +83,7 @@ const Login = ({ navigation }) => {
           <Button
             disabled={loading}
             title="Entre"
-            color="green"
+            color="#177567"
             onPress={login}
           />
 
@@ -91,7 +91,7 @@ const Login = ({ navigation }) => {
 
           <Button
             title="Recuperar senha"
-            color="darkgreen"
+            color="#D4A417"
             onPress={recuperarSenha}
           />
         </View>
@@ -105,7 +105,7 @@ export default Login;
 const estilos = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "lightgreen",
+    backgroundColor: "#F7F5ED",
     alignItems: "center",
     justifyContent: "center",
   },
