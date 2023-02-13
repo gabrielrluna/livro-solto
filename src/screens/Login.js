@@ -31,7 +31,7 @@ const Login = ({ navigation }) => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, senha)
       .then(() => {
-        navigation.replace("Perfil");
+        navigation.replace("PerfilStack");
       })
       .catch((error) => {
         // console.log(error);

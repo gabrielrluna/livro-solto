@@ -9,12 +9,7 @@ import {
 } from "react-native";
 
 import { auth } from "../../firebaseConfig";
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const Cadastro = ({ navigation }) => {
@@ -55,7 +50,7 @@ const Cadastro = ({ navigation }) => {
           {
             text: "Acessar Perfil",
             onPress: () => {
-              navigation.replace("Perfil");
+              navigation.replace("LoginStack");
             },
             style: "default",
           },

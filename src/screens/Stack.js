@@ -97,6 +97,21 @@ export function PerfilStack() {
         name="PerfilStack"
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        component={Login}
+        name="LoginStack"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        component={Cadastro}
+        name="CadastroStack"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        component={Home}
+        name="HomeStack"
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
@@ -127,9 +142,10 @@ export function CadastroStack() {
         name="CadastroStack"
         options={{ headerShown: false }}
       />
+
       <Stack.Screen
-        component={Perfil}
-        name="PerfilStack"
+        component={Login}
+        name="LoginStack"
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

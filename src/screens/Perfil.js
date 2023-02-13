@@ -26,7 +26,7 @@ const Perfil = ({ navigation }) => {
   const logout = () => {
     signOut(auth)
       .then(() => {
-        navigation.replace("Inicial");
+        navigation.replace("HomeStack");
       })
       .catch((error) => {
         console.log(error);
