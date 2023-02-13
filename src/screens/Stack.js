@@ -109,6 +109,12 @@ export function LoginStack() {
         name="LoginStack"
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        component={Perfil}
+        name="PerfilStack"
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
@@ -119,6 +125,11 @@ export function CadastroStack() {
       <Stack.Screen
         component={Cadastro}
         name="CadastroStack"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        component={Perfil}
+        name="PerfilStack"
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

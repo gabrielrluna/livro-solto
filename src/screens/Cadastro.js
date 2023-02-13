@@ -9,7 +9,12 @@ import {
 } from "react-native";
 
 import { auth } from "../../firebaseConfig";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const Cadastro = ({ navigation }) => {

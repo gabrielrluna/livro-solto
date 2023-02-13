@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   StyleSheet,
   Text,
   View,
@@ -13,8 +14,12 @@ import garotaLendo from "../../assets/images/garota-lendo.png";
 
 import { auth } from "../../firebaseConfig";
 import { signOut } from "firebase/auth";
+import { useState } from "react";
 
-const Perfil = () => {
+const Perfil = ({ navigation }) => {
+  const [loading, setLoading] = useState(false);
+
+  /* Dados do usuário atual (logado) */
   const usuarioLogado = auth.currentUser;
   console.log(usuarioLogado);
 
@@ -45,6 +50,8 @@ const Perfil = () => {
         <Image style={styles.garotaLendo} source={garotaLendo} />
         <Button title="Logout" color="#D35400" onPress={logout} />
       </View>
+
+      {loading && <ActivityIndicator size="large" color="orange" />}
 
       <View style={styles.chatView}>
         <Pressable style={styles.chatBotao}>
