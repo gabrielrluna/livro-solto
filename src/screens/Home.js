@@ -20,7 +20,7 @@ import { useEffect } from "react";
 
 import { ActionModal } from "../components/ActionModal";
 
-import serverApi from "../services/servidor-api";
+import serverApi from "../api/serverApi";
 
 const Home = ({ navigation }) => {
   console.log(serverApi);
