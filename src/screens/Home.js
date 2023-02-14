@@ -13,7 +13,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import { Entypo } from "@expo/vector-icons";
 import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+
 import logo from "../../assets/images/logo.png";
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
 import { useEffect } from "react";
@@ -22,7 +22,7 @@ import { ActionModal } from "../components/ActionModal";
 
 import serverApi from "../api/serverApi";
 
-const Home = ({ navigation }, { genero }) => {
+const Home = ({ genero }) => {
   const [livros, setLivros] = useState([]);
   useEffect(() => {
     async function getLivros() {
@@ -50,7 +50,7 @@ const Home = ({ navigation }, { genero }) => {
         }
         setLivros(listaDeLivros);
       } catch (error) {
-        console.log("Deu ruim aí­ hein chapa " + error.message);
+        console.log("Deu ruim aí hein chapa " + error.message);
       }
     }
     getLivros();
@@ -102,7 +102,7 @@ const Home = ({ navigation }, { genero }) => {
           capa={capa}
         >
           <View style={styles.livroBackground}>
-            {{ capa } && (
+            {capa && (
               <Image
                 source={fundoAlternativo}
                 style={styles.fundoAlternativo}

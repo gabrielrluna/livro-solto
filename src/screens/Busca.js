@@ -7,6 +7,7 @@ import {
   Text,
   View,
   TextInput,
+  FlatList,
 } from "react-native";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
@@ -19,6 +20,10 @@ import serverApi from "../api/serverApi";
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
 
 const Busca = ({ navigation }, { genero }) => {
+  const [texto, setTexto] = useState("");
+  const inputTexto = (valor) => {
+    setTexto(valor);
+  };
   const [fonteCarregada] = useFonts({
     roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
   });
@@ -61,7 +66,11 @@ const Busca = ({ navigation }, { genero }) => {
       <View></View>
 
       <View style={styles.inputView}>
-        <TextInput style={styles.input} placeholder="Digite o livro" />
+        <TextInput
+          style={styles.input}
+          placeholder="livro..."
+          onChangeText={inputTexto}
+        />
         <Pressable style={styles.inputBotao}>
           <Text style={styles.texto}>
             <AntDesign name="search1" size={20} color="white" />

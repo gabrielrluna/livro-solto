@@ -5,6 +5,7 @@ import {
   View,
   Image,
   Pressable,
+  FlatList,
 } from "react-native";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
