@@ -1,62 +1,100 @@
 import { StyleSheet, Text, View, StatusBar, Pressable } from "react-native";
 import React from "react";
+import { useFonts } from "expo-font";
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
-import { useFonts } from "expo-font";
+import serverApi from "../api/serverApi";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const DetalhesLivro = () => {
+const DetalhesLivro = ({ genero }, { navigation }) => {
   const [fonteCarregada] = useFonts({
     roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
   });
+
+  const [livros, setLivros] = useState([]);
+  useEffect(() => {
+    async function getLivros() {
+      try {
+        const resposta = await fetch(`${serverApi}/livros.json`);
+        const dados = await resposta.json();
+
+        let listaDeLivros = [];
+
+        for (const livro in dados) {
+          const objetoLivro = {
+            id: livro,
+            titulo: dados[livro].titulo,
+            capa: dados[livro].capa,
+            descricao: dados[livro].descricao,
+            genero: dados[livro].genero,
+            dono: dados[livro].dono,
+          };
+          listaDeLivros.push(objetoLivro);
+          if (genero) {
+            listaDeLivros = listaDeLivros.filter(
+              (cadaLivro) => cadaLivro.genero === genero
+            );
+          }
+        }
+        setLivros(listaDeLivros);
+      } catch (error) {
+        console.log("Deu ruim aí­ hein chapa " + error.message);
+      }
+    }
+    getLivros();
+  }, [genero]);
+
   if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
 
   return (
     <>
       <StatusBar style={styles.caixa} />
-      <SafeAreaView style={styles.container}>
-        <View style={styles.caixa}>
-          <View style={styles.fotoContainer}></View>
-          <View style={styles.nome}>
-            <Text>Titulo</Text>
+      {livros.map(({ id, titulo, genero, dono, capa, descricao }) => (
+        <SafeAreaView
+          style={styles.container}
+          key={id}
+          id={id}
+          titulo={titulo}
+          dono={dono}
+          genero={genero}
+          descricao={descricao}
+          capa={capa}
+        >
+          <View style={styles.caixa}>
+            <View style={styles.fotoContainer}></View>
+            <View style={styles.nome}>
+              <Text> {titulo} </Text>
+            </View>
+            <View style={styles.botoes}>
+              <Pressable style={styles.favoritar}>
+                <AntDesign name="hearto" size={16} color="#402914" />
+              </Pressable>
+              <Pressable style={styles.escolher}>
+                <Text style={styles.textoEscolher}>
+                  <AntDesign name="pluscircle" size={16} color="white" />
+                  {""} Escolher
+                </Text>
+              </Pressable>
+            </View>
           </View>
-          <View style={styles.botoes}>
-            <Pressable style={styles.favoritar}>
-              <AntDesign name="hearto" size={16} color="#402914" />
-            </Pressable>
-            <Pressable style={styles.escolher}>
-              <Text style={styles.textoEscolher}>
-                <AntDesign name="pluscircle" size={16} color="white" />
-                {""} Escolher
-              </Text>
-            </Pressable>
+
+          <View style={styles.infos}>
+            <Text> </Text>
+            <Text>{genero}</Text>
+            <Text> </Text>
+            <Text>|</Text>
+            <Text> </Text>
+            <Text>{dono}</Text>
           </View>
-        </View>
 
-        <View style={styles.infos}>
-          <Text>Autor</Text>
-          <Text> </Text>
-          <Text>|</Text>
-          <Text> </Text>
-          <Text>GÃªnero</Text>
-          <Text> </Text>
-          <Text>|</Text>
-          <Text> </Text>
-          <Text>Dono</Text>
-        </View>
-
-        <View>
-          <Text style={styles.descTitle}>DescriÃ§Ã£o:</Text>
-          <Text style={styles.descText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut
-            commodo sem. Donec sed auctor nisl. Proin varius ipsum risus, ut
-            porta leo aliquet sed. Curabitur ultricies efficitur cursus. Aenean
-            commodo tincidunt risus, ac dictum eros feugiat ac. Interdum et
-            malesuada fames ac ante ipsum primis in faucibus. Morbi ultrices
-            efficitur mattis. Sed vitae commodo dolor.
-          </Text>
-        </View>
-      </SafeAreaView>
+          <View>
+            <Text style={styles.descTitle}>Descrição:</Text>
+            <Text style={styles.descText}>{descricao}</Text>
+          </View>
+        </SafeAreaView>
+      ))}
     </>
   );
 };

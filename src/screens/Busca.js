@@ -12,13 +12,48 @@ import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import { useState } from "react";
+import { useEffect } from "react";
+import serverApi from "../api/serverApi";
 
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
 
-const Busca = ({ navigation }) => {
+const Busca = ({ navigation }, { genero }) => {
   const [fonteCarregada] = useFonts({
     roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
   });
+  const [livros, setLivros] = useState([]);
+  useEffect(() => {
+    async function getLivros() {
+      try {
+        const resposta = await fetch(`${serverApi}/livros.json`);
+        const dados = await resposta.json();
+
+        let listaDeLivros = [];
+
+        for (const livro in dados) {
+          const objetoLivro = {
+            id: livro,
+            titulo: dados[livro].titulo,
+            capa: dados[livro].capa,
+            descricao: dados[livro].descricao,
+            genero: dados[livro].genero,
+            dono: dados[livro].dono,
+          };
+          listaDeLivros.push(objetoLivro);
+          if (genero) {
+            listaDeLivros = listaDeLivros.filter(
+              (cadaLivro) => cadaLivro.genero === genero
+            );
+          }
+        }
+        setLivros(listaDeLivros);
+      } catch (error) {
+        console.log("Deu ruim aí­ hein chapa " + error.message);
+      }
+    }
+    getLivros();
+  }, [genero]);
 
   if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
   return (
@@ -34,40 +69,54 @@ const Busca = ({ navigation }) => {
           </Text>
         </Pressable>
       </View>
-
-      <View style={styles.livroCard}>
-        <View style={styles.livroBackground}>
-          <Image source={fundoAlternativo} style={styles.fundoAlternativo} />
-        </View>
-        <View style={styles.titulo}>
-          <Text style={styles.textoTitulo}>TITULO CAPITALIZE</Text>
-        </View>
-        <View style={styles.yellowButtonsView}>
-          <Pressable
-            style={styles.yellowButtons}
-            onPress={() => {
-              navigation.navigate("DetalhesLivroStack");
-            }}
-          >
-            <Text style={styles.brownText}>
-              <AntDesign name="infocirlceo" size={16} color="#5A3F26" />
-              {""} Detalhes
+      {livros.map(({ id, titulo, genero, dono, capa }) => (
+        <View
+          style={styles.livroCard}
+          key={id}
+          id={id}
+          titulo={titulo}
+          dono={dono}
+          genero={genero}
+          capa={capa}
+        >
+          <View style={styles.livroBackground}>
+            {{ capa } && (
+              <Image
+                source={fundoAlternativo}
+                style={styles.fundoAlternativo}
+              />
+            )}
+          </View>
+          <View style={styles.titulo}>
+            <Text style={styles.textoTitulo}> {titulo} </Text>
+          </View>
+          <View style={styles.yellowButtonsView}>
+            <Pressable
+              style={styles.yellowButtons}
+              onPress={() => {
+                navigation.navigate("DetalhesLivroStack");
+              }}
+            >
+              <Text style={styles.brownText}>
+                <AntDesign name="infocirlceo" size={16} color="#5A3F26" />
+                {""} Detalhes
+              </Text>
+            </Pressable>
+            <Pressable style={styles.yellowButtons}>
+              <Text style={styles.brownText}>
+                <AntDesign name="hearto" size={16} color="#5A3F26" />
+                {""} Favoritar
+              </Text>
+            </Pressable>
+          </View>
+          <Pressable style={styles.escolherBotao}>
+            <Text style={styles.texto}>
+              <AntDesign name="pluscircle" size={18} color="white" />
+              {""} Escolher
             </Text>
           </Pressable>
-          <Pressable style={styles.yellowButtons}>
-            <Text style={styles.brownText}>
-              <AntDesign name="hearto" size={16} color="#5A3F26" />
-              {""} Favoritar
-            </Text>
-          </Pressable>
         </View>
-        <Pressable style={styles.escolherBotao}>
-          <Text style={styles.texto}>
-            <AntDesign name="pluscircle" size={18} color="white" />
-            {""} Escolher
-          </Text>
-        </Pressable>
-      </View>
+      ))}
     </SafeAreaView>
   );
 };
