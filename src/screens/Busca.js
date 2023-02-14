@@ -7,7 +7,7 @@ import {
   Text,
   View,
   TextInput,
-  FlatList,
+  ScrollView,
 } from "react-native";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
@@ -78,54 +78,56 @@ const Busca = ({ navigation }, { genero }) => {
           </Text>
         </Pressable>
       </View>
-      {livros.map(({ id, titulo, genero, dono, capa }) => (
-        <View
-          style={styles.livroCard}
-          key={id}
-          id={id}
-          titulo={titulo}
-          dono={dono}
-          genero={genero}
-          capa={capa}
-        >
-          <View style={styles.livroBackground}>
-            {{ capa } && (
-              <Image
-                source={fundoAlternativo}
-                style={styles.fundoAlternativo}
-              />
-            )}
-          </View>
-          <View style={styles.titulo}>
-            <Text style={styles.textoTitulo}> {titulo} </Text>
-          </View>
-          <View style={styles.yellowButtonsView}>
-            <Pressable
-              style={styles.yellowButtons}
-              onPress={() => {
-                navigation.navigate("DetalhesLivroStack");
-              }}
-            >
-              <Text style={styles.brownText}>
-                <AntDesign name="infocirlceo" size={16} color="#5A3F26" />
-                {""} Detalhes
+      <ScrollView style={styles.scrollView} horizontal={true}>
+        {livros.map(({ id, titulo, genero, dono, capa }) => (
+          <View
+            style={styles.livroCard}
+            key={id}
+            id={id}
+            titulo={titulo}
+            dono={dono}
+            genero={genero}
+            capa={capa}
+          >
+            <View style={styles.livroBackground}>
+              {{ capa } && (
+                <Image
+                  source={fundoAlternativo}
+                  style={styles.fundoAlternativo}
+                />
+              )}
+            </View>
+            <View style={styles.titulo}>
+              <Text style={styles.textoTitulo}> {titulo} </Text>
+            </View>
+            <View style={styles.yellowButtonsView}>
+              <Pressable
+                style={styles.yellowButtons}
+                onPress={() => {
+                  navigation.navigate("DetalhesLivroStack");
+                }}
+              >
+                <Text style={styles.brownText}>
+                  <AntDesign name="infocirlceo" size={16} color="#5A3F26" />
+                  {""} Detalhes
+                </Text>
+              </Pressable>
+              <Pressable style={styles.yellowButtons}>
+                <Text style={styles.brownText}>
+                  <AntDesign name="hearto" size={16} color="#5A3F26" />
+                  {""} Favoritar
+                </Text>
+              </Pressable>
+            </View>
+            <Pressable style={styles.escolherBotao}>
+              <Text style={styles.texto}>
+                <AntDesign name="pluscircle" size={18} color="white" />
+                {""} Escolher
               </Text>
             </Pressable>
-            <Pressable style={styles.yellowButtons}>
-              <Text style={styles.brownText}>
-                <AntDesign name="hearto" size={16} color="#5A3F26" />
-                {""} Favoritar
-              </Text>
-            </Pressable>
           </View>
-          <Pressable style={styles.escolherBotao}>
-            <Text style={styles.texto}>
-              <AntDesign name="pluscircle" size={18} color="white" />
-              {""} Escolher
-            </Text>
-          </Pressable>
-        </View>
-      ))}
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -170,9 +172,9 @@ const styles = StyleSheet.create({
   },
   livroCard: {
     backgroundColor: "#D9D9D9",
-    height: "60%",
-    width: "60%",
-    marginVertical: 8,
+    height: "80%",
+    width: "40%",
+    marginHorizontal: 20,
   },
   livroBackground: {
     height: "80%",
@@ -222,5 +224,9 @@ const styles = StyleSheet.create({
     fontFamily: "roboto",
     textAlign: "center",
     color: "white",
+  },
+  scrollView: {
+    marginHorizontal: 20,
+    marginVertical: 20,
   },
 });
