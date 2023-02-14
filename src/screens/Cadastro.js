@@ -5,8 +5,12 @@ import {
   Button,
   StyleSheet,
   TextInput,
+  Image,
   View,
 } from "react-native";
+
+import logo from "../../assets/images/logo.png";
+
 
 import { auth } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -83,6 +87,9 @@ const Cadastro = ({ navigation }) => {
 
   return (
     <View style={estilos.container}>
+      <View>
+      <Image style={estilos.logo} source={logo} />
+      </View>
       <View style={estilos.formulario}>
         <TextInput
           placeholder="Nome"
@@ -126,7 +133,7 @@ const Cadastro = ({ navigation }) => {
             disabled={loading}
             onPress={cadastrar}
             title="Cadastre-se"
-            color="blue"
+            color="#5A3F26"
           />
           {loading && <ActivityIndicator size="large" color="blue" />}
         </View>
@@ -140,7 +147,7 @@ export default Cadastro;
 const estilos = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "lightblue",
+    backgroundColor: "#F2EEE3",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -159,5 +166,10 @@ const estilos = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  logo: {
+    resizeMode: "contain",
+    width: 150,
+    height: 150,
   },
 });

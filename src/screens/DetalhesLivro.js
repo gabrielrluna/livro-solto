@@ -40,7 +40,7 @@ const DetalhesLivro = ({ genero }, { navigation }) => {
         }
         setLivros(listaDeLivros);
       } catch (error) {
-        console.log("Deu ruim aí­ hein chapa " + error.message);
+        console.log("Deu ruim aï¿½ï¿½ hein chapa " + error.message);
       }
     }
     getLivros();
@@ -90,7 +90,7 @@ const DetalhesLivro = ({ genero }, { navigation }) => {
           </View>
 
           <View>
-            <Text style={styles.descTitle}>Descrição:</Text>
+            <Text style={styles.descTitle}>Descriï¿½ï¿½o:</Text>
             <Text style={styles.descText}>{descricao}</Text>
           </View>
         </SafeAreaView>

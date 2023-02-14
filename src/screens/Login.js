@@ -5,8 +5,11 @@ import {
   Button,
   StyleSheet,
   TextInput,
+  Image,
   View,
 } from "react-native";
+import logo from "../../assets/images/logo.png";
+
 
 /* Importamos os recursos de autenticação através das configurações Firebase */
 import { auth } from "../../firebaseConfig";
@@ -65,6 +68,9 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={estilos.container}>
+      <View>
+      <Image style={estilos.logo} source={logo} />
+      </View>
       <View style={estilos.formulario}>
         <TextInput
           onChangeText={(valor) => setEmail(valor)}
@@ -124,5 +130,10 @@ const estilos = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  logo: {
+    resizeMode: "contain",
+    width: 150,
+    height: 150,
   },
 });

@@ -6,6 +6,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  FlatList,
   Modal,
   ScrollView,
 } from "react-native";
@@ -51,11 +52,38 @@ const Home = ({ genero }) => {
         }
         setLivros(listaDeLivros);
       } catch (error) {
-        console.log("Deu ruim a� hein chapa " + error.message);
+        console.log("Deu ruim a� hein chapa " + error.message);
       }
     }
     getLivros();
   }, [genero]);
+
+  const salvar = async () => {
+
+    /* Etapas para uso do AsyncStorage */
+    // 1) Carregamento do storage do aparelho (se houver, caso contrário retorna null)
+    const livrosFavoritos = await AsyncStorage.getItem("@favoritos");
+
+    // 2) Havendo storage prévio, transformamos os dados do filme em objeto e os guardamos numa lista (array)
+    let listaDeLivros = JSON.parse(livrosFavoritos);
+
+    // 3) Se a lista for indefinida, vamos iniciá-la como um array vazio
+    if (!listaDeLivros) {
+      listaDeLivros = [];
+    }
+
+    /* Etapa de verificação de filme já salvo */
+
+    /* Para cada filme existente na listaDeFilmes (se existir) */
+    for (let livroExistente in listaDeLivros) {
+      /* Verificamos se o id do filme existente é igual ao id do
+      filme do card (que está na tela) */
+      if (listaDeFilmes[filmeExistente].id == filme.id) {
+        Alert.alert("Ops!", "Você já salvou este filme!");
+        Vibration.vibrate();
+        return;
+      }
+    }
 
   const [visibleModal, setVisibleModal] = useState(false);
   const [fonteCarregada] = useFonts({
@@ -82,6 +110,7 @@ const Home = ({ genero }) => {
           <ActionModal fecharModal={() => setVisibleModal(false)} />
         </Modal>
       </View>
+<<<<<<< Updated upstream
       <ScrollView style={styles.scrollView} horizontal={true}>
         {livros.map(({ id, titulo, genero, dono, capa }) => (
           <View
@@ -127,6 +156,46 @@ const Home = ({ genero }) => {
               <Text style={styles.texto}>
                 <AntDesign name="pluscircle" size={18} color="white" />
                 {""} Escolher
+=======
+
+      {livros.map(({ id, titulo, genero, dono, capa }) => (
+        <View
+          style={styles.livroCard}
+          key={id}
+          id={id}
+          titulo={titulo}
+          dono={dono}
+          genero={genero}
+          capa={capa}
+        >
+          <View style={styles.livroBackground}>
+            {capa && (
+              <Image
+                source={fundoAlternativo}
+                style={styles.fundoAlternativo}
+              />
+            )}
+          </View>
+          <View style={styles.titulo}>
+            <Text style={styles.textoTitulo}>{titulo}</Text>
+          </View>
+          <View style={styles.yellowButtonsView}>
+            <Pressable
+              style={styles.yellowButtons}
+              onPress={() => {
+                navigation.navigate("DetalhesLivroStack");
+              }}
+            >
+              <Text style={styles.brownText}>
+                <AntDesign name="infocirlceo" size={16} color="#5A3F26" />
+                {""} Detalhes
+              </Text>
+            </Pressable>
+            <Pressable style={styles.yellowButtons} onPress={salvar}>
+              <Text style={styles.brownText}>
+                <AntDesign name="hearto" size={16} color="#5A3F26" />
+                {""} Favoritar
+>>>>>>> Stashed changes
               </Text>
             </Pressable>
           </View>
