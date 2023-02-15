@@ -11,41 +11,38 @@ import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-import {useEffect,useState} from "react";
-import {useNavigation} from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
 
 const Favoritos = () => {
-const [listaFavoritos, setListaFavoritos] = useState([])
+  const [listaFavoritos, setListaFavoritos] = useState([]);
 
-const navigation = useNavigation();
-
-  const [fonteCarregada] = useFonts({
-    roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
-  });
-  if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
- 
+  const navigation = useNavigation();
 
   useEffect(() => {
-    async function carregarFavoritos (){
+    async function carregarFavoritos() {
       try {
         const dados = await AsyncStorage.getItem("@favoritos");
         const livros = JSON.parse(dados);
-        if (dados != null){
+        if (dados != null) {
           setListaFavoritos(livros);
         }
-      }catch (error){
+      } catch (error) {
         console.log("Falha no carregamento: " + error.message);
       }
     }
     carregarFavoritos();
   }, []);
 
+  const [fonteCarregada] = useFonts({
+    roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
+  });
+
   const verDetalhes = (livroSelecionado) => {
-    navigation.navigate("Detalhes", {filme: filmeSelecionado});
+    navigation.navigate("Detalhes", { filme: filmeSelecionado });
   };
 
   const excluirFavoritos = async () => {
@@ -56,29 +53,31 @@ const navigation = useNavigation();
         {
           text: "Cancelar",
           onPress: () => {
-          return false;
+            return false;
           },
           style: "cancel",
-          },
+        },
         {
           text: "Sim, excluir tudo!",
           onPress: async () => {
-          await AsyncStorage.removeItem("@favoritos");
-          setListaFavoritos([]);
+            await AsyncStorage.removeItem("@favoritos");
+            setListaFavoritos([]);
           },
-          style: "destructive"
-          },
-        ]
+          style: "destructive",
+        },
+      ]
     );
   };
- 
+
   const excluirUmFavorito = async (indice) => {
-    listaFavoritos.splice(indice,1);
+    listaFavoritos.splice(indice, 1);
     await AsyncStorage.setItem("@favoritos", JSON.stringify(listaFavoritos));
     const listaDeLivros = JSON.parse(await AsyncStorage.getItem("@favoritos"));
     setListaFavoritos(listaDeLivros);
-  }
- 
+  };
+
+  if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.cardFavorite}>

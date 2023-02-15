@@ -71,13 +71,22 @@ const Home = ({ navigation }, { genero }) => {
         return;
       }
     }
+
+    // 4) Adicionamos os dados do filme na lista (array)
+    listaDeLivros.push(livro);
+
+    // 5) Finalmente, salvamos COMO STRING no storage do dispositivo
+    await AsyncStorage.setItem("@favoritos", JSON.stringify(listaDeLivros));
+
+    Alert.alert("Favoritos", "Livro salvo com sucesso!");
   };
+
   const [visibleModal, setVisibleModal] = useState(false);
   const [fonteCarregada] = useFonts({
     roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
   });
 
-  if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
+  // if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
 
   return (
     <SafeAreaView style={styles.container}>
