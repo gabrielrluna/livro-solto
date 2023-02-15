@@ -33,7 +33,7 @@ const Cadastro = ({ navigation }) => {
 
   const cadastrar = () => {
     if (!email || !senha) {
-      Alert.alert("Atenção", "Você deve preencher e-mail e senha");
+      Alert.alert("Atenï¿½ï¿½o", "Vocï¿½ deve preencher e-mail e senha");
       return;
     }
     /* imagem */
@@ -72,22 +72,22 @@ const Cadastro = ({ navigation }) => {
         let mensagem;
         switch (error.code) {
           case "auth/email-already-in-use":
-            mensagem = "E-mail já cadastrado!";
+            mensagem = "E-mail jï¿½ cadastrado!";
             break;
 
           case "auth/weak-password":
-            mensagem = "Senha deve ter pelo menos 6 dígitos!";
+            mensagem = "Senha deve ter pelo menos 6 dï¿½gitos!";
             break;
 
           case "auth/invalid-email":
-            mensagem = "Endereço de e-mail inválido!";
+            mensagem = "Endereï¿½o de e-mail invï¿½lido!";
             break;
 
           default:
             mensagem = "Algo deu errado... tente novamente!";
             break;
         }
-        Alert.alert("Atençãoo!", mensagem);
+        Alert.alert("Atenï¿½ï¿½oo!", mensagem);
       })
       .finally(() => setLoading(false));
   };
@@ -119,7 +119,7 @@ const Cadastro = ({ navigation }) => {
             setItems={setItems}
             onChangeItem={(item) => setPeriodo(item.value)}
             translation={{
-              PLACEHOLDER: "Período",
+              PLACEHOLDER: "Perï¿½odo",
             }}
           />
         </View>
