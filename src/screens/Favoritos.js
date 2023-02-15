@@ -8,9 +8,12 @@ import {
   ScrollView,
 } from "react-native";
 import { useFonts } from "expo-font";
-import { AntDesign } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  FontAwesome,
+  AntDesign,
+  Ionicons,
+} from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useEffect, useState } from "react";
@@ -80,18 +83,19 @@ const Favoritos = () => {
   if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={estilos.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {listaFavoritos.map((filmeFavorito, indice) => {
+        {listaFavoritos.map((livroFavorito, titulo, indice) => {
           return (
             <Pressable
               // onPress={verDetalhes}
               // onPress={verDetalhes.bind(this, filmeFavorito)}
-              onPress={() => verDetalhes(filmeFavorito)}
-              key={filmeFavorito.id}
-              style={estilos.itemFilme}
+              onPress={() => verDetalhes(livroFavorito)}
+              key={livroFavorito.id}
+              titulo={livroFavorito.titulo}
+              style={estilos.itemLivro}
             >
-              <Text style={estilos.titulo}>{filmeFavorito.title}</Text>
+              <Text style={estilos.titulo}>{titulo}</Text>
               <Pressable
                 style={estilos.botaoExcluir}
                 // onPress={excluirUmFavorito}
@@ -104,6 +108,15 @@ const Favoritos = () => {
           );
         })}
       </ScrollView>
+
+      <Pressable style={estilos.limparBotao} onPress={excluirFavoritos}>
+        <Text style={estilos.limparTexto}>
+          {" "}
+          <AntDesign name="close" size={20} color="white" />
+          Limpar Tudo{" "}
+        </Text>
+      </Pressable>
+
       {/* <View style={styles.cardFavorite}>
          <View style={styles.imageView}>
            <Image style={styles.image} source={fundoAlternativo} />
@@ -134,13 +147,11 @@ const Favoritos = () => {
 
 export default Favoritos;
 
-const styles = StyleSheet.create({
+const estilos = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
     padding: 8,
-    alignItems: "center",
-    fontFamily: "roboto",
+    backgroundColor: "#F2EEE3",
   },
   cardFavorite: {
     backgroundColor: "#D9D9D9",
@@ -194,4 +205,14 @@ const styles = StyleSheet.create({
     color: "#F7F5ED",
     fontWeight: "bold",
   },
+  itemLivro: {
+    padding: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "#eee8fc",
+    marginVertical: 8,
+    borderRadius: 4,
+    alignItems: "center",
+  },
+  titulo: { flex: 1, fontSize: 14, color: "black" },
 });

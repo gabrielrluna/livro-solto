@@ -3,7 +3,7 @@ import { useRoute } from "@react-navigation/native";
 import { GiftedChat } from "react-native-gifted-chat";
 import { useCallback, useEffect, useState } from "react";
 
-//importação do firebase e database
+//importaï¿½ï¿½o do firebase e database
 import {
   collection,
   addDoc,
@@ -11,7 +11,7 @@ import {
   query,
   orderBy,
 } from "firebase/firestore";
-import { database } from "../config/firebase";
+import { database } from "../../firebaseConfig";
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
@@ -38,7 +38,7 @@ export default function Chat() {
     getMessages();
   }, []);
 
-  //função que aciona assim que envia a mensagem no aplicativo
+  //funï¿½ï¿½o que aciona assim que envia a mensagem no aplicativo
   const mensagemEnviada = useCallback((messages = []) => {
     setMessages((previousMessages) => {
       GiftedChat.append(previousMessages, messages);

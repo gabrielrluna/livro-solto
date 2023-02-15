@@ -11,7 +11,6 @@ import {
 
 import logo from "../../assets/images/logo.png";
 
-
 import { auth } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -19,7 +18,6 @@ import DropDownPicker from "react-native-dropdown-picker";
 const Cadastro = ({ navigation }) => {
   const [nome, setNome] = useState("");
   const [senac, setSenac] = useState("");
-  const [periodo, setPeriodo] = useState("");
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -88,7 +86,7 @@ const Cadastro = ({ navigation }) => {
   return (
     <View style={estilos.container}>
       <View>
-      <Image style={estilos.logo} source={logo} />
+        <Image style={estilos.logo} source={logo} />
       </View>
       <View style={estilos.formulario}>
         <TextInput
