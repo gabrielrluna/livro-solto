@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Alert,
   TouchableOpacity,
   FlatList,
   Modal,
@@ -19,6 +20,8 @@ import { useState } from "react";
 import logo from "../../assets/images/logo.png";
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
 import { useEffect } from "react";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { ActionModal } from "../components/ActionModal";
 
@@ -64,18 +67,16 @@ const Home = ({ navigation }, { genero }) => {
     if (!listaDeLivros) {
       listaDeLivros = [];
     }
-    for (let livroExistente in listaDeLivros) {
-      if (listaDeFilmes[filmeExistente].id == filme.id) {
-        Alert.alert("Ops!", "Você já salvou este filme!");
-        Vibration.vibrate();
-        return;
-      }
-    }
+    // for (let livroExistente in listaDeLivros) {
+    //   if (listaDeFilmes[livroExistente].id == filme.id) {
+    //     Alert.alert("Ops!", "Você já salvou este Livro!");
+    //     Vibration.vibrate();
+    //     return;
+    //   }
+    // }
 
-    // 4) Adicionamos os dados do filme na lista (array)
-    listaDeLivros.push(livro);
+    listaDeLivros.push(livros);
 
-    // 5) Finalmente, salvamos COMO STRING no storage do dispositivo
     await AsyncStorage.setItem("@favoritos", JSON.stringify(listaDeLivros));
 
     Alert.alert("Favoritos", "Livro salvo com sucesso!");

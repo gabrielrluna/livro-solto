@@ -5,7 +5,7 @@ import {
   View,
   Image,
   Pressable,
-  FlatList,
+  ScrollView,
 } from "react-native";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
@@ -29,6 +29,7 @@ const Favoritos = () => {
         const livros = JSON.parse(dados);
         if (dados != null) {
           setListaFavoritos(livros);
+          console.log(listaFavoritos);
         }
       } catch (error) {
         console.log("Falha no carregamento: " + error.message);
@@ -42,7 +43,7 @@ const Favoritos = () => {
   });
 
   const verDetalhes = (livroSelecionado) => {
-    navigation.navigate("Detalhes", { filme: filmeSelecionado });
+    navigation.navigate("Detalhes", { livro: livroSelecionado });
   };
 
   const excluirFavoritos = async () => {
@@ -80,6 +81,11 @@ const Favoritos = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      
+      <ScrollView showsVerticalScrollIndicator={false}>
+          {listaFavoritos.map((filmeFavorito, indice) => {
+            return (
+
       <View style={styles.cardFavorite}>
         <View style={styles.imageView}>
           <Image style={styles.image} source={fundoAlternativo} />
@@ -88,13 +94,15 @@ const Favoritos = () => {
           <Text style={styles.title}>Título do livro</Text>
         </View>
         <View style={styles.iconView}>
-          <Text>
-            <AntDesign name="minuscircle" size={20} color="white" />
-          </Text>
+          <Pressable style={styles.yellowButtons} onPress={excluirUmFavorito}>
+            <Text>
+              <AntDesign name="minuscircle" size={20} color="white" />
+            </Text>
+          </Pressable>
         </View>
       </View>
       <View style={styles.limparView}>
-        <Pressable style={styles.limparBotao}>
+        <Pressable style={styles.limparBotao} onPress={excluirFavoritos}>
           <Text style={styles.limparTexto}>
             {" "}
             <AntDesign name="close" size={20} color="white" />
