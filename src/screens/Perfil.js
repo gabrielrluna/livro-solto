@@ -20,9 +20,9 @@ const Perfil = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
 
-  /* Dados do usuÃ¡rio atual (logado) */
   const usuarioLogado = auth.currentUser;
   console.log(usuarioLogado);
+  console.log();
 
   const logout = () => {
     signOut(auth)
@@ -41,8 +41,8 @@ const Perfil = ({ navigation }) => {
           <Image source={fotoAlternativa} style={styles.foto} />
         </View>
         <View style={styles.dadosContainer}>
-          <Text style={styles.nome}>Estrubufúncia Silva</Text>
-          <Text style={styles.texto}>Senac Favela</Text>
+          <Text style={styles.nome}>{usuarioLogado.displayName}</Text>
+          <Text style={styles.texto}>{usuarioLogado.email}</Text>
         </View>
       </View>
 
