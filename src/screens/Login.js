@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import logo from "../../assets/images/logo.png";
 
-
 /* Importamos os recursos de autenticação através das configurações Firebase */
 import { auth } from "../../firebaseConfig";
 
@@ -69,7 +68,7 @@ const Login = ({ navigation }) => {
   return (
     <View style={estilos.container}>
       <View>
-      <Image style={estilos.logo} source={logo} />
+        <Image style={estilos.logo} source={logo} />
       </View>
       <View style={estilos.formulario}>
         <TextInput
