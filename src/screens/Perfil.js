@@ -16,7 +16,11 @@ import { auth } from "../../firebaseConfig";
 import { signOut } from "firebase/auth";
 import { useState } from "react";
 
-const Perfil = ({ navigation }) => {
+import { useNavigation } from "@react-navigation/native";
+
+const Perfil = () => {
+  const navigation = useNavigation();
+
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
 
@@ -27,12 +31,15 @@ const Perfil = ({ navigation }) => {
   const logout = () => {
     signOut(auth)
       .then(() => {
-        navigation.replace("HomeStack");
+        navigation.replace("LoginStack");
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  if (!auth.currentUser) {
+    navigation.replace("LoginStack");
+  }
 
   return (
     <SafeAreaView style={styles.container}>

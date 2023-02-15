@@ -13,13 +13,17 @@ import logo from "../../assets/images/logo.png";
 /* Importamos os recursos de autenticação através das configurações Firebase */
 import { auth } from "../../firebaseConfig";
 
+import { useNavigation } from "@react-navigation/native";
+
 /* Importamos as funções de autenticação diretamente da lib */
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
 
-const Login = ({ navigation }) => {
+const Login = () => {
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);

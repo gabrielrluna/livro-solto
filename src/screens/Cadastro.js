@@ -118,7 +118,7 @@ const Cadastro = ({ navigation }) => {
             setItems={setItems}
             onChangeItem={(item) => setPeriodo(item.value)}
             translation={{
-              PLACEHOLDER: "Per�odo",
+              PLACEHOLDER: "Período",
             }}
           />
         </View>
