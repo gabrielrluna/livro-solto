@@ -81,35 +81,53 @@ const Favoritos = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      
       <ScrollView showsVerticalScrollIndicator={false}>
-          {listaFavoritos.map((filmeFavorito, indice) => {
-            return (
-
-      <View style={styles.cardFavorite}>
-        <View style={styles.imageView}>
-          <Image style={styles.image} source={fundoAlternativo} />
-        </View>
-        <View style={styles.titleView}>
-          <Text style={styles.title}>Título do livro</Text>
-        </View>
-        <View style={styles.iconView}>
+        {listaFavoritos.map((filmeFavorito, indice) => {
+          return (
+            <Pressable
+              // onPress={verDetalhes}
+              // onPress={verDetalhes.bind(this, filmeFavorito)}
+              onPress={() => verDetalhes(filmeFavorito)}
+              key={filmeFavorito.id}
+              style={estilos.itemFilme}
+            >
+              <Text style={estilos.titulo}>{filmeFavorito.title}</Text>
+              <Pressable
+                style={estilos.botaoExcluir}
+                // onPress={excluirUmFavorito}
+                // onPress={() => excluirUmFavorito(indice)}
+                onPress={excluirUmFavorito.bind(this, indice)}
+              >
+                <Ionicons name="trash" size={16} color="white" />
+              </Pressable>
+            </Pressable>
+          );
+        })}
+      </ScrollView>
+      {/* <View style={styles.cardFavorite}>
+         <View style={styles.imageView}>
+           <Image style={styles.image} source={fundoAlternativo} />
+         </View>
+         <View style={styles.titleView}>
+           <Text style={styles.title}>Título do livro</Text>
+         </View>
+         <View style={styles.iconView}>
           <Pressable style={styles.yellowButtons} onPress={excluirUmFavorito}>
-            <Text>
-              <AntDesign name="minuscircle" size={20} color="white" />
-            </Text>
-          </Pressable>
-        </View>
-      </View>
-      <View style={styles.limparView}>
-        <Pressable style={styles.limparBotao} onPress={excluirFavoritos}>
-          <Text style={styles.limparTexto}>
-            {" "}
-            <AntDesign name="close" size={20} color="white" />
-            Limpar Tudo{" "}
-          </Text>
-        </Pressable>
-      </View>
+             <Text>
+               <AntDesign name="minuscircle" size={20} color="white" />
+             </Text>
+           </Pressable>
+         </View>
+       </View>
+       <View style={styles.limparView}>
+         <Pressable style={styles.limparBotao} onPress={excluirFavoritos}>
+           <Text style={styles.limparTexto}>
+             {" "}
+             <AntDesign name="close" size={20} color="white" />
+             Limpar Tudo{" "}
+           </Text>
+         </Pressable>
+       </View> */}
     </SafeAreaView>
   );
 };
