@@ -148,6 +148,7 @@ const Home = ({ navigation }, { genero }) => {
           </View>
         ))}
       </ScrollView>
+      {""}
     </SafeAreaView>
   );
 };
