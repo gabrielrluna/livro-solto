@@ -18,6 +18,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 const Cadastro = ({ navigation }) => {
   const [nome, setNome] = useState("");
   const [senac, setSenac] = useState("");
+  const [periodo, setPeriodo] = useState("");
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -43,8 +44,6 @@ const Cadastro = ({ navigation }) => {
       .then(() => {
         updateProfile(auth.currentUser, {
           displayName: nome,
-          senac,
-          periodo,
         });
 
         Alert.alert("Cadastro", "Conta criada com sucesso!", [

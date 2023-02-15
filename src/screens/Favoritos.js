@@ -85,17 +85,21 @@ const Favoritos = () => {
   return (
     <SafeAreaView style={estilos.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {listaFavoritos.map((livroFavorito, titulo, indice) => {
+        {listaFavoritos.map((livroFavorito, indice) => {
+          console.log(listaFavoritos[0][0].titulo);
+          console.log(listaFavoritos[0][1].titulo);
+          console.log(listaFavoritos[0][2].titulo);
           return (
             <Pressable
               // onPress={verDetalhes}
               // onPress={verDetalhes.bind(this, filmeFavorito)}
-              onPress={() => verDetalhes(livroFavorito)}
-              key={livroFavorito.id}
-              titulo={livroFavorito.titulo}
+              onPress={() => verDetalhes(livroFavorito.indice)}
+              key={indice}
               style={estilos.itemLivro}
             >
-              <Text style={estilos.titulo}>{titulo}</Text>
+              <Text style={estilos.titulo}>
+                {listaFavoritos[0][indice].titulo}
+              </Text>
               <Pressable
                 style={estilos.botaoExcluir}
                 // onPress={excluirUmFavorito}
