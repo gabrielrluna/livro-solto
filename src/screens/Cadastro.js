@@ -10,8 +10,7 @@ import {
 } from "react-native";
 
 import logo from "../../assets/images/logo.png";
-
-
+import apiAxios from "../api/apiAxios";
 import { auth } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -35,15 +34,14 @@ const Cadastro = ({ navigation }) => {
 
   const cadastrar = () => {
     if (!email || !senha) {
-      Alert.alert("AtenÃ§Ã£o", "VocÃª deve preencher e-mail e senha");
+      Alert.alert("Atenção", "Você deve preencher e-mail e senha");
       return;
     }
+    /* imagem */
 
     setLoading(true);
-    createUserWithEmailAndPassword(auth, email, senha, senac, periodo)
+    createUserWithEmailAndPassword(auth, email, senha)
       .then(() => {
-        /* Ao fazer a criaÃ§Ã£o do novo usuÃ¡rio (com email e senha), aproveitamos para atualizar
-        via updateProfile a propriedade do auth que permite adicionar um nome ao usuÃ¡rio */
         updateProfile(auth.currentUser, {
           displayName: nome,
           senac,
@@ -60,27 +58,37 @@ const Cadastro = ({ navigation }) => {
           },
         ]);
       })
+      .then(async () => {
+        const resposta = await apiAxios.post("/users.json", {
+          nome: nome,
+          senac: senac,
+          email: email,
+          senha: senha,
+          periodo: periodo,
+          foto: "",
+        });
+      })
       .catch((error) => {
         console.log(error);
         let mensagem;
         switch (error.code) {
           case "auth/email-already-in-use":
-            mensagem = "E-mail jÃ¡ cadastrado!";
+            mensagem = "E-mail já cadastrado!";
             break;
 
           case "auth/weak-password":
-            mensagem = "Senha deve ter pelo menos 6 dÃ­gitos!";
+            mensagem = "Senha deve ter pelo menos 6 dígitos!";
             break;
 
           case "auth/invalid-email":
-            mensagem = "EndereÃ§o de e-mail invÃ¡lido!";
+            mensagem = "Endereço de e-mail inválido!";
             break;
 
           default:
             mensagem = "Algo deu errado... tente novamente!";
             break;
         }
-        Alert.alert("AtenÃ§Ã£o!", mensagem);
+        Alert.alert("Atençãoo!", mensagem);
       })
       .finally(() => setLoading(false));
   };
@@ -88,7 +96,7 @@ const Cadastro = ({ navigation }) => {
   return (
     <View style={estilos.container}>
       <View>
-      <Image style={estilos.logo} source={logo} />
+        <Image style={estilos.logo} source={logo} />
       </View>
       <View style={estilos.formulario}>
         <TextInput
@@ -110,8 +118,9 @@ const Cadastro = ({ navigation }) => {
             setOpen={setOpen}
             setValue={setValue}
             setItems={setItems}
+            onChangeItem={(item) => setPeriodo(item.value)}
             translation={{
-              PLACEHOLDER: "PerÃ­odo",
+              PLACEHOLDER: "Período",
             }}
           />
         </View>
