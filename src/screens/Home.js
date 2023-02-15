@@ -7,7 +7,7 @@ import {
   View,
   Alert,
   TouchableOpacity,
-  FlatList,
+  Vibration,
   Modal,
   ScrollView,
 } from "react-native";
@@ -68,7 +68,7 @@ const Home = ({ navigation }, { genero }) => {
       listaDeLivros = [];
     }
     // for (let livroExistente in listaDeLivros) {
-    //   if (listaDeFilmes[livroExistente].id == filme.id) {
+    //   if (listaDeLivros[livroExistente].id == livros.id) {
     //     Alert.alert("Ops!", "Você já salvou este Livro!");
     //     Vibration.vibrate();
     //     return;
@@ -87,7 +87,7 @@ const Home = ({ navigation }, { genero }) => {
     roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
   });
 
-  // if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
+  if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
 
   return (
     <SafeAreaView style={styles.container}>

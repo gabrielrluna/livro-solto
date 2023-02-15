@@ -13,6 +13,7 @@ import Sobre from "./Sobre";
 import Privacidade from "./Privacidade";
 import Login from "./Login";
 import Cadastro from "./Cadastro";
+import Chat from "./Chat";
 
 const Stack = createNativeStackNavigator();
 
@@ -110,6 +111,11 @@ export function PerfilStack() {
       <Stack.Screen
         component={Home}
         name="HomeStack"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        component={Chat}
+        name="ChatStack"
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
