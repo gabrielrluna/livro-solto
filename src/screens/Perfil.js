@@ -18,6 +18,7 @@ import { useState } from "react";
 
 const Perfil = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
 
   /* Dados do usuário atual (logado) */
   const usuarioLogado = auth.currentUser;
@@ -40,8 +41,7 @@ const Perfil = ({ navigation }) => {
           <Image source={fotoAlternativa} style={styles.foto} />
         </View>
         <View style={styles.dadosContainer}>
-          <Text style={styles.nome}>Estrubufúncia Silva</Text>
-          <Text style={styles.texto}>198 Anos</Text>
+          <Text style={styles.nome}>Estrubuf�ncia Silva</Text>
           <Text style={styles.texto}>Senac Favela</Text>
         </View>
       </View>
@@ -54,7 +54,10 @@ const Perfil = ({ navigation }) => {
       {loading && <ActivityIndicator size="large" color="orange" />}
 
       <View style={styles.chatView}>
-        <Pressable style={styles.chatBotao}>
+        <Pressable
+          style={styles.chatBotao}
+          onPress={() => navigation.navigate("Chat", { name: name })}
+        >
           <Text style={styles.textoBotao}>
             <AntDesign name="message1" size={20} color="white" />
             {""} Ver/Enviar Mensagens

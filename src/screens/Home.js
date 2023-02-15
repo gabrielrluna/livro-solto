@@ -24,7 +24,7 @@ import { ActionModal } from "../components/ActionModal";
 
 import serverApi from "../api/serverApi";
 
-const Home = ({ genero }) => {
+const Home = ({ navigation }, { genero }) => {
   const [livros, setLivros] = useState([]);
   useEffect(() => {
     async function getLivros() {
