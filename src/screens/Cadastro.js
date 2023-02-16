@@ -10,8 +10,6 @@ import {
   Pressable,
   Text
 } from "react-native";
-
-import logo from "../../assets/images/logo.png";
 import apiAxios from "../api/apiAxios";
 import { auth } from "../../firebaseConfig";
 import {firebase} from "../../firebaseConfig";
@@ -67,10 +65,7 @@ const Cadastro = ({ navigation }) => {
     setLoading(true);
     createUserWithEmailAndPassword(auth, email, senha)
     .then(() => {
-      updateProfile(auth.currentUser, {
-        displayName: nome,
-      });
-
+      
       Alert.alert("Cadastro", "Conta criada com sucesso!", [
         {
           text: "Acessar Perfil",
@@ -110,7 +105,10 @@ const Cadastro = ({ navigation }) => {
               periodo: periodo,
               foto: url_imagem,
             });
-            
+            updateProfile(auth.currentUser, {
+              displayName: nome,
+              photoURL: url_imagem,
+            });
           }
         );
       }
@@ -178,7 +176,7 @@ const Cadastro = ({ navigation }) => {
             setOpen={setOpen}
             setValue={setValue}
             setItems={setItems}
-            onChangeItem={(item) => setPeriodo(item.value)}
+            onChangeItem={(items) => setPeriodo(items.value)}
             translation={{
               PLACEHOLDER: "Período",
             }}

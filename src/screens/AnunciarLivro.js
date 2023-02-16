@@ -8,20 +8,53 @@ import {
   Pressable,
   Alert,
 } from "react-native";
+import apiAxios from "../api/apiAxios";
+import { auth } from "../../firebaseConfig";
+import {firebase} from "../../firebaseConfig";
 import DropDownPicker from "react-native-dropdown-picker";
 import imagePlaceholder from "../../assets/images/imagePlaceholder.png";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 
-const AnunciarLivro = () => {
+const AnunciarLivro = ({navigation}) => {
+  const [titulo, setTitulo] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [autor, setAutor] = useState("");
+  const [dono, setDono] = useState("");
+  const [capa, setCapa] = useState(null);
+  const [uploading, setUploading] = useState();
+  const [urlCapa, setUrlCapa] = useState(null);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
     { label: "Romance", value: "romance" },
     { label: "Didático", value: "didatico" },
   ]);
-  const enviar = () => {
+  const [loading, setLoading] = useState(false);
+  const [uploadInProgress, setUploadInProgress] = useState(false);
+  const [progressPercentage, setProgressPercentage] = useState(0);
+
+  const pickerImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+    });
+    console.log(result.canceled);
+    if (!result.canceled) {
+      setCapa(result.assets[0].uri);
+      console.log(result.assets[0].uri);
+    }
+  };
+
+  const enviar = async () => {
+    if (!titulo || !descricao || !capa || !items) {
+      Alert.alert("Atenção", "Você deve preencher todos os campos");
+      return;
+    }
     Alert.alert(
       "Certeza que quer enviar?",
       "Ao clicar você disponibiliza o livro",
@@ -38,24 +71,71 @@ const AnunciarLivro = () => {
           style: "destructive",
         },
       ]
-    );
+    )    .then(async () => {
+      if (!uploadInProgress) {
+        setUploadInProgress(true);
+        const imgResponse = await fetch(foto);
+        const blobFile = await imgResponse.blob();
+        const fileName = foto.substring(foto.lastIndexOf("/") + 1);
+        let upload = firebase
+          .storage()
+          .ref("users/")
+          .child(fileName)
+          .put(blobFile);
+        upload.on(
+          "state_changed",
+          (snapshot) => {
+            setProgressPercentage((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+          },
+          (error) => {
+            console.error(error.message);
+          },
+          async () => {
+            const url_imagem = await upload.snapshot.ref.getDownloadURL();
+            const resposta = await apiAxios.post("/livros.json", {
+              titulo: titulo,
+              descricao: descricao,
+              dono: dono,
+              autor: autor,
+              genero: genero,
+              capa: url_imagem,
+            });
+          }
+        );
+      }
+      
+    })
+    .catch((error) => {
+     console.log(error.message);
+    })
+    .finally(() => {
+      setLoading(false);
+      setUploadInProgress(false)
+    });
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageView}>
-        <Image source={imagePlaceholder} style={styles.image} />
+        {
+          capa ?
+          <Image source={{uri: capa}} style={styles.image} />
+          : <Image source={imagePlaceholder} style={styles.image} />
+        }
+        
       </View>
       <View style={styles.formView}>
         <TextInput
           style={styles.inputUm}
           blurOnSubmit={true}
           placeholder="Titulo do Livro"
+          onChangeText={(valor) => setTitulo(valor)}
         />
         <TextInput
           style={styles.inputUm}
           blurOnSubmit={true}
           placeholder="Autor"
+          onChangeText={(valor) => setAutor(valor)}
         />
         <TextInput
           style={styles.inputDois}
@@ -64,6 +144,7 @@ const AnunciarLivro = () => {
           autoFocus={false}
           blurOnSubmit={true}
           placeholder="Descrição"
+          onChangeText={(valor) => setDescricao(valor)}
           numberOfLines={4}
           maxLength={140}
         />
@@ -77,13 +158,14 @@ const AnunciarLivro = () => {
               setOpen={setOpen}
               setValue={setValue}
               setItems={setItems}
+              onChangeItem={(items) => setGenero(items.value)}
               translation={{
                 PLACEHOLDER: "Selecione",
               }}
             />
           </View>
           <View style={{ width: "49%" }}>
-            <Pressable style={styles.buscarBotao}>
+            <Pressable style={styles.buscarBotao} onPress={pickerImage}>
               <Text style={styles.texto}>
                 <AntDesign name="search1" size={20} color="white" />
                 Buscar Capa

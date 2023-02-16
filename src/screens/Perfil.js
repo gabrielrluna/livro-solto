@@ -25,9 +25,11 @@ const Perfil = () => {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
 
+
   const usuarioLogado = auth.currentUser;
+
   console.log(usuarioLogado);
-  console.log(usuarioLogado.foto);
+  
 
   const logout = () => {
     signOut(auth)
@@ -42,11 +44,17 @@ const Perfil = () => {
     navigation.replace("LoginStack");
   }
 
+  
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.cardPerfil}>
         <View style={styles.fotoContainer}>
-          <Image source={fotoAlternativa} style={styles.foto} />
+          {
+            (usuarioLogado && usuarioLogado.photoURL) ? 
+            <Image source={{ uri: usuarioLogado.photoURL}} style={styles.foto} />
+            : <Image source={fotoAlternativa} style={styles.foto} />
+          }
         </View>
         <View style={styles.dadosContainer}>
           <Text style={styles.nome}>{usuarioLogado.displayName}</Text>
