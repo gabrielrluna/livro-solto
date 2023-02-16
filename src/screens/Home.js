@@ -25,10 +25,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { ActionModal } from "../components/ActionModal";
 
+import apiAxios from "../api/apiAxios";
+import { auth } from "../../firebaseConfig";
+import {firebase} from "../../firebaseConfig";
+
 import serverApi from "../api/serverApi";
 
 const Home = ({ navigation }, { genero }) => {
+  const usuarioLogado = auth.currentUser;
+  console.log(usuarioLogado ? usuarioLogado.uid : "");
   const [livros, setLivros] = useState([]);
+  const [userId, setUserId] = useState("");
+  const [livroId, setLivroId] = useState("");
   useEffect(() => {
     async function getLivros() {
       try {
@@ -89,6 +97,14 @@ const Home = ({ navigation }, { genero }) => {
 
   if (!fonteCarregada) return <Text>Fonte sendo carregada</Text>;
 
+  const escolher = async (livroId) => {
+    console.log("chegay akie" + livroId);
+    const resposta = await apiAxios.post("/userLivrosInteresse.json", {
+      userId: usuarioLogado.uid,
+      livroId: livroId,
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.barraLogo}>
@@ -109,18 +125,24 @@ const Home = ({ navigation }, { genero }) => {
       </View>
 
       <ScrollView style={styles.scrollView} horizontal={true}>
-        {livros.map(({ id, titulo, genero, dono, capa }) => (
+        {livros.map(({ id, titulo, genero, dono, capa, autor }) => (
           <View
             style={styles.livroCard}
             key={id}
             id={id}
+            autor={autor}
             titulo={titulo}
             dono={dono}
             genero={genero}
             capa={capa}
           >
             <View style={styles.livroBackground}>
-              {capa && (
+              {capa ? (
+                <Image
+                  source={{uri: capa.uri}}
+                  style={styles.fundoAlternativo}
+                />
+              ) : (
                 <Image
                   source={fundoAlternativo}
                   style={styles.fundoAlternativo}
@@ -149,7 +171,10 @@ const Home = ({ navigation }, { genero }) => {
                 </Text>
               </Pressable>
             </View>
-            <Pressable style={styles.escolherBotao}>
+            <Pressable style={styles.escolherBotao}
+            onPress={(id) => {
+             escolher(id)
+            }}>
               <Text style={styles.texto}>
                 <AntDesign name="pluscircle" size={18} color="white" />
                 {""} Escolher
