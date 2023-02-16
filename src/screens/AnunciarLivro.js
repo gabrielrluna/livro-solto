@@ -36,6 +36,10 @@ const AnunciarLivro = ({navigation}) => {
   const [uploadInProgress, setUploadInProgress] = useState(false);
   const [progressPercentage, setProgressPercentage] = useState(0);
 
+  const usuarioLogado = auth.currentUser;
+
+  console.log(usuarioLogado);
+
   const pickerImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -74,12 +78,12 @@ const AnunciarLivro = ({navigation}) => {
     )    .then(async () => {
       if (!uploadInProgress) {
         setUploadInProgress(true);
-        const imgResponse = await fetch(foto);
+        const imgResponse = await fetch(capa);
         const blobFile = await imgResponse.blob();
-        const fileName = foto.substring(foto.lastIndexOf("/") + 1);
+        const fileName = capa.substring(capa.lastIndexOf("/") + 1);
         let upload = firebase
           .storage()
-          .ref("users/")
+          .ref("livros/")
           .child(fileName)
           .put(blobFile);
         upload.on(
