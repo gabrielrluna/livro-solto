@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
   Button,
+  Alert,
 } from "react-native";
 import fotoAlternativa from "../../assets/images/fotoAlternativa.png";
 import { AntDesign } from "@expo/vector-icons";
@@ -14,7 +15,7 @@ import garotaLendo from "../../assets/images/garota-lendo.png";
 
 import { auth } from "../../firebaseConfig";
 import { signOut } from "firebase/auth";
-import {firebase} from "../../firebaseConfig";
+import { firebase } from "../../firebaseConfig";
 import { useState } from "react";
 
 import { useNavigation } from "@react-navigation/native";
@@ -25,11 +26,9 @@ const Perfil = () => {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
 
-
   const usuarioLogado = auth.currentUser;
 
   console.log(usuarioLogado);
-  
 
   const logout = () => {
     signOut(auth)
@@ -44,17 +43,18 @@ const Perfil = () => {
     navigation.replace("LoginStack");
   }
 
-  
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.cardPerfil}>
         <View style={styles.fotoContainer}>
-          {
-            (usuarioLogado && usuarioLogado.photoURL) ? 
-            <Image source={{ uri: usuarioLogado.photoURL}} style={styles.foto} />
-            : <Image source={fotoAlternativa} style={styles.foto} />
-          }
+          {usuarioLogado && usuarioLogado.photoURL ? (
+            <Image
+              source={{ uri: usuarioLogado.photoURL }}
+              style={styles.foto}
+            />
+          ) : (
+            <Image source={fotoAlternativa} style={styles.foto} />
+          )}
         </View>
         <View style={styles.dadosContainer}>
           <Text style={styles.nome}>{usuarioLogado.displayName}</Text>
@@ -72,7 +72,10 @@ const Perfil = () => {
       <View style={styles.chatView}>
         <Pressable
           style={styles.chatBotao}
-          onPress={() => navigation.navigate("Chat", { name: name })}
+          onPress={() => {
+            Alert.alert("Chat indisponível", "Tente novamente em breve");
+          }}
+          //onPress={() => navigation.navigate("Chat", { name: name })}
         >
           <Text style={styles.textoBotao}>
             <AntDesign name="message1" size={20} color="white" />

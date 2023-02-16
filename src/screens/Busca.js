@@ -8,6 +8,7 @@ import {
   View,
   TextInput,
   ScrollView,
+  Alert,
 } from "react-native";
 import { useFonts } from "expo-font";
 import { AntDesign } from "@expo/vector-icons";
@@ -54,7 +55,7 @@ const Busca = ({ navigation }, { genero }) => {
         }
         setLivros(listaDeLivros);
       } catch (error) {
-        console.log("Deu ruim aí­ hein chapa " + error.message);
+        console.log("Deu ruim aï¿½ï¿½ hein chapa " + error.message);
       }
     }
     getLivros();
@@ -71,7 +72,12 @@ const Busca = ({ navigation }, { genero }) => {
           placeholder="livro..."
           onChangeText={inputTexto}
         />
-        <Pressable style={styles.inputBotao}>
+        <Pressable
+          style={styles.inputBotao}
+          onPress={() => {
+            Alert.alert("Busca indisponÃ­vel", "Tente novamente em breve");
+          }}
+        >
           <Text style={styles.texto}>
             <AntDesign name="search1" size={20} color="white" />
             Buscar Livro
@@ -119,7 +125,15 @@ const Busca = ({ navigation }, { genero }) => {
                 </Text>
               </Pressable>
             </View>
-            <Pressable style={styles.escolherBotao}>
+            <Pressable
+              style={styles.escolherBotao}
+              onPress={() => {
+                Alert.alert(
+                  "VocÃª manifestou interesse",
+                  "PoderÃ¡ falar com o colega em breve"
+                );
+              }}
+            >
               <Text style={styles.texto}>
                 <AntDesign name="pluscircle" size={18} color="white" />
                 {""} Escolher

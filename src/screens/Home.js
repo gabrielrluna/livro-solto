@@ -27,7 +27,7 @@ import { ActionModal } from "../components/ActionModal";
 
 import apiAxios from "../api/apiAxios";
 import { auth } from "../../firebaseConfig";
-import {firebase} from "../../firebaseConfig";
+import { firebase } from "../../firebaseConfig";
 
 import serverApi from "../api/serverApi";
 
@@ -139,7 +139,7 @@ const Home = ({ navigation }, { genero }) => {
             <View style={styles.livroBackground}>
               {capa ? (
                 <Image
-                  source={{uri: capa.uri}}
+                  source={{ uri: capa.uri }}
                   style={styles.fundoAlternativo}
                 />
               ) : (
@@ -171,10 +171,15 @@ const Home = ({ navigation }, { genero }) => {
                 </Text>
               </Pressable>
             </View>
-            <Pressable style={styles.escolherBotao}
-            onPress={(id) => {
-             escolher(id)
-            }}>
+            <Pressable
+              style={styles.escolherBotao}
+              onPress={() => {
+                Alert.alert(
+                  "Você manifestou interesse",
+                  "Poderá falar com o colega em breve"
+                );
+              }}
+            >
               <Text style={styles.texto}>
                 <AntDesign name="pluscircle" size={18} color="white" />
                 {""} Escolher

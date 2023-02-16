@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, StatusBar, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  Pressable,
+  Alert,
+} from "react-native";
 import React from "react";
 import { useFonts } from "expo-font";
 import fundoAlternativo from "../../assets/images/fundoAlternativo.jpg";
@@ -71,7 +78,15 @@ const DetalhesLivro = ({ genero }, { navigation }) => {
               <Pressable style={styles.favoritar}>
                 <AntDesign name="hearto" size={16} color="#402914" />
               </Pressable>
-              <Pressable style={styles.escolher}>
+              <Pressable
+                style={styles.escolher}
+                onPress={() => {
+                  Alert.alert(
+                    "Você manifestou interesse",
+                    "Poderá falar com o colega em breve"
+                  );
+                }}
+              >
                 <Text style={styles.textoEscolher}>
                   <AntDesign name="pluscircle" size={16} color="white" />
                   {""} Escolher
