@@ -138,10 +138,7 @@ const Home = ({ navigation }, { genero }) => {
           >
             <View style={styles.livroBackground}>
               {capa ? (
-                <Image
-                  source={{ uri: capa.uri }}
-                  style={styles.fundoAlternativo}
-                />
+                <Image source={{ uri: capa }} style={styles.fundoAlternativo} />
               ) : (
                 <Image
                   source={fundoAlternativo}

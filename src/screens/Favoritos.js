@@ -46,7 +46,7 @@ const Favoritos = () => {
   });
 
   const verDetalhes = (livroSelecionado) => {
-    navigation.navigate("Detalhes", { livro: livroSelecionado });
+    navigation.navigate("DetalhesLivroStack", { livro: livroSelecionado });
   };
 
   const excluirFavoritos = async () => {

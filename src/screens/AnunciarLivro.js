@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import apiAxios from "../api/apiAxios";
 import { auth } from "../../firebaseConfig";
-import {firebase} from "../../firebaseConfig";
+import { firebase } from "../../firebaseConfig";
 import DropDownPicker from "react-native-dropdown-picker";
 import imagePlaceholder from "../../assets/images/imagePlaceholder.png";
 import { useState } from "react";
@@ -19,7 +19,7 @@ import { Feather } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { LinkingContext } from "@react-navigation/native";
 
-const AnunciarLivro = ({navigation}) => {
+const AnunciarLivro = ({ navigation }) => {
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [autor, setAutor] = useState("");
@@ -81,21 +81,23 @@ const AnunciarLivro = ({navigation}) => {
     try {
       if (!uploadInProgress) {
         setUploadInProgress(true);
-        
+
         const imgResponse = await fetch(capa);
         const blobFile = await imgResponse.blob();
         const fileName = capa.substring(capa.lastIndexOf("/") + 1);
-        
+
         let upload = firebase
           .storage()
           .ref("livros/")
           .child(fileName)
           .put(blobFile);
-        
+
         upload.on(
           "state_changed",
           (snapshot) => {
-            setProgressPercentage((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+            setProgressPercentage(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
           },
           (error) => {
             console.error(error.message);
@@ -112,24 +114,24 @@ const AnunciarLivro = ({navigation}) => {
             });
           }
         );
-      }  
+      }
     } catch (error) {
       console.log(error.message);
     } finally {
       setLoading(false);
       setUploadInProgress(false);
+      setCapa(capa);
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageView}>
-        {
-          capa ?
-          <Image source={{uri: capa}} style={styles.image} />
-          : <Image source={imagePlaceholder} style={styles.image} />
-        }
-        
+        {capa ? (
+          <Image source={{ uri: capa }} style={styles.image} />
+        ) : (
+          <Image source={imagePlaceholder} style={styles.image} />
+        )}
       </View>
       <View style={styles.formView}>
         <TextInput
