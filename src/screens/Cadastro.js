@@ -7,23 +7,31 @@ import {
   TextInput,
   Image,
   View,
+  Pressable,
+  Text
 } from "react-native";
 
 import logo from "../../assets/images/logo.png";
 import apiAxios from "../api/apiAxios";
 import { auth } from "../../firebaseConfig";
+import {firebase} from "../../firebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import DropDownPicker from "react-native-dropdown-picker";
+import * as ImagePicker from "expo-image-picker";
+import imagePlaceholder from "../../assets/images/imagePlaceholder.png";
 
 const Cadastro = ({ navigation }) => {
   const [nome, setNome] = useState("");
   const [senac, setSenac] = useState("");
   const [periodo, setPeriodo] = useState("");
+  const [foto, setFoto] = useState(null);
+  const [uploading, setUploading] = useState();
+  const [urlFoto, setUrlFoto] = useState(null);
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
-    { label: "Manhã", value: "manhã" },
+    { label: "Manhã", value: "manha" },
     { label: "Tarde", value: "tarde" },
     { label: "Noite", value: "noite" },
   ]);
@@ -32,79 +40,133 @@ const Cadastro = ({ navigation }) => {
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const cadastrar = () => {
+  const [uploadInProgress, setUploadInProgress] = useState(false);
+  const [progressPercentage, setProgressPercentage] = useState(0);
+
+  const pickerImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+    });
+    console.log(result.canceled);
+    if (!result.canceled) {
+      setFoto(result.assets[0].uri);
+      console.log(result.assets[0].uri);
+    }
+  };
+
+
+
+  const cadastrar = async () => {
     if (!email || !senha) {
-      Alert.alert("Aten��o", "Voc� deve preencher e-mail e senha");
+      Alert.alert("Atençãoo", "Você deve preencher e-mail e senha");
       return;
     }
-    /* imagem */
-
     setLoading(true);
     createUserWithEmailAndPassword(auth, email, senha)
-      .then(() => {
-        updateProfile(auth.currentUser, {
-          displayName: nome,
-        });
+    .then(() => {
+      updateProfile(auth.currentUser, {
+        displayName: nome,
+      });
 
-        Alert.alert("Cadastro", "Conta criada com sucesso!", [
-          {
-            text: "Acessar Perfil",
-            onPress: () => {
-              navigation.replace("LoginStack");
-            },
-            style: "default",
+      Alert.alert("Cadastro", "Conta criada com sucesso!", [
+        {
+          text: "Acessar Perfil",
+          onPress: () => {
+            navigation.replace("LoginStack");
           },
-        ]);
-      })
-      .then(async () => {
-        const resposta = await apiAxios.post("/users.json", {
-          nome: nome,
-          senac: senac,
-          email: email,
-          senha: senha,
-          periodo: periodo,
-          foto: "",
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        let mensagem;
-        switch (error.code) {
-          case "auth/email-already-in-use":
-            mensagem = "E-mail j� cadastrado!";
-            break;
+          style: "default",
+        },
+      ]);
+    })
+    .then(async () => {
+      if (!uploadInProgress) {
+        setUploadInProgress(true);
+        const imgResponse = await fetch(foto);
+        const blobFile = await imgResponse.blob();
+        const fileName = foto.substring(foto.lastIndexOf("/") + 1);
+        let upload = firebase
+          .storage()
+          .ref("users/")
+          .child(fileName)
+          .put(blobFile);
+        upload.on(
+          "state_changed",
+          (snapshot) => {
+            setProgressPercentage((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+          },
+          (error) => {
+            console.error(error.message);
+          },
+          async () => {
+            const url_imagem = await upload.snapshot.ref.getDownloadURL();
+            const resposta = await apiAxios.post("/users.json", {
+              nome: nome,
+              senac: senac,
+              email: email,
+              senha: senha,
+              periodo: periodo,
+              foto: url_imagem,
+            });
+            
+          }
+        );
+      }
 
-          case "auth/weak-password":
-            mensagem = "Senha deve ter pelo menos 6 d�gitos!";
-            break;
 
-          case "auth/invalid-email":
-            mensagem = "Endere�o de e-mail inv�lido!";
-            break;
+      
 
-          default:
-            mensagem = "Algo deu errado... tente novamente!";
-            break;
-        }
-        Alert.alert("Aten��oo!", mensagem);
-      })
-      .finally(() => setLoading(false));
+      
+    })
+    .catch((error) => {
+      console.log(error);
+      let mensagem;
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          mensagem = "E-mail já cadastrado!";
+          break;
+
+        case "auth/weak-password":
+          mensagem = "Senha deve ter pelo menos 6 dígitos!";
+          break;
+
+        case "auth/invalid-email":
+          mensagem = "Endereço de e-mail inválido!";
+          break;
+
+        default:
+          mensagem = "Algo deu errado... tente novamente!";
+          break;
+      }
+      Alert.alert("Atenção!", mensagem);
+    })
+    .finally(() => {
+      setLoading(false);
+      setUploadInProgress(false)
+    });
   };
 
   return (
-    <View style={estilos.container}>
-      <View>
-        <Image style={estilos.logo} source={logo} />
+    <View style={styles.container}>
+      <View style={styles.formulario}>
+      <View style={styles.imageView}>
+        
+        {
+          foto ?
+          <Image source={{uri: foto}} style={styles.image} />
+          : <Image source={imagePlaceholder} style={styles.image}/>
+        }
       </View>
-      <View style={estilos.formulario}>
         <TextInput
           placeholder="Nome"
-          style={estilos.input}
+          style={styles.input}
           onChangeText={(valor) => setNome(valor)}
         />
         <TextInput
           placeholder="Senac"
-          style={estilos.input}
+          style={styles.input}
           onChangeText={(valor) => setSenac(valor)}
         />
 
@@ -125,33 +187,46 @@ const Cadastro = ({ navigation }) => {
 
         <TextInput
           placeholder="E-mail"
-          style={estilos.input}
+          style={styles.input}
           keyboardType="email-address"
           onChangeText={(valor) => setEmail(valor)}
         />
         <TextInput
           placeholder="Senha"
-          style={estilos.input}
+          style={styles.input}
           secureTextEntry
           onChangeText={(valor) => setSenha(valor)}
         />
-        <View style={estilos.botoes}>
+        <View>
+        <Pressable style={styles.botao} onPress={pickerImage}>
+        <Text style={styles.textoBotao}>Escolher foto</Text>
+      </Pressable>
+        </View>
+        <View style={styles.botoes}>
+
           <Button
             disabled={loading}
             onPress={cadastrar}
             title="Cadastre-se"
             color="#5A3F26"
+         
           />
           {loading && <ActivityIndicator size="large" color="blue" />}
+
+
         </View>
+
       </View>
+
+
+      
     </View>
   );
 };
 
 export default Cadastro;
 
-const estilos = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F2EEE3",
@@ -161,6 +236,19 @@ const estilos = StyleSheet.create({
   formulario: {
     marginVertical: 16,
     width: "80%",
+  },
+  imageView: {
+    alignItems: "center",
+    height: 200,
+    width: 150,
+    justifyContent: "center",
+    borderColor: "black",
+    margin: 10,
+    padding: 10,
+  },
+  image: {
+    height: 200,
+    width: 150,
   },
   input: {
     backgroundColor: "white",
@@ -179,4 +267,17 @@ const estilos = StyleSheet.create({
     width: 150,
     height: 150,
   },
+  botao: {
+    height: 50,
+    width: "100%",
+    marginVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 6,
+    backgroundColor: "#EEBF33",
+  },
+  textoBotao: {
+    fontSize: 20,
+  },
+
 });

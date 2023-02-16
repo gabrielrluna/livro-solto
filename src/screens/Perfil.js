@@ -14,6 +14,7 @@ import garotaLendo from "../../assets/images/garota-lendo.png";
 
 import { auth } from "../../firebaseConfig";
 import { signOut } from "firebase/auth";
+import {firebase} from "../../firebaseConfig";
 import { useState } from "react";
 
 import { useNavigation } from "@react-navigation/native";
@@ -26,7 +27,7 @@ const Perfil = () => {
 
   const usuarioLogado = auth.currentUser;
   console.log(usuarioLogado);
-  console.log();
+  console.log(usuarioLogado.foto);
 
   const logout = () => {
     signOut(auth)
