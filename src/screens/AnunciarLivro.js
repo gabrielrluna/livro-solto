@@ -17,6 +17,7 @@ import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { LinkingContext } from "@react-navigation/native";
 
 const AnunciarLivro = ({navigation}) => {
   const [titulo, setTitulo] = useState("");
@@ -32,6 +33,7 @@ const AnunciarLivro = ({navigation}) => {
     { label: "Romance", value: "romance" },
     { label: "Didático", value: "didatico" },
   ]);
+  const [genero, setGenero] = useState("");
   const [loading, setLoading] = useState(false);
   const [uploadInProgress, setUploadInProgress] = useState(false);
   const [progressPercentage, setProgressPercentage] = useState(0);
@@ -75,17 +77,21 @@ const AnunciarLivro = ({navigation}) => {
           style: "destructive",
         },
       ]
-    )    .then(async () => {
+    );
+    try {
       if (!uploadInProgress) {
         setUploadInProgress(true);
+        
         const imgResponse = await fetch(capa);
         const blobFile = await imgResponse.blob();
         const fileName = capa.substring(capa.lastIndexOf("/") + 1);
+        
         let upload = firebase
           .storage()
           .ref("livros/")
           .child(fileName)
           .put(blobFile);
+        
         upload.on(
           "state_changed",
           (snapshot) => {
@@ -99,23 +105,20 @@ const AnunciarLivro = ({navigation}) => {
             const resposta = await apiAxios.post("/livros.json", {
               titulo: titulo,
               descricao: descricao,
-              dono: dono,
+              dono: usuarioLogado.uid,
               autor: autor,
               genero: genero,
               capa: url_imagem,
             });
           }
         );
-      }
-      
-    })
-    .catch((error) => {
-     console.log(error.message);
-    })
-    .finally(() => {
+      }  
+    } catch (error) {
+      console.log(error.message);
+    } finally {
       setLoading(false);
-      setUploadInProgress(false)
-    });
+      setUploadInProgress(false);
+    }
   };
 
   return (
